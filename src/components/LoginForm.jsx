@@ -1,11 +1,97 @@
-import React from 'react'
+import React from 'react';
+import {
+    Container,
+    TextField,
+    Button,
+    Typography,
+    Box,
+    Link,
+} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+
+const schema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+});
 
 const LoginForm = () => {
-  return (
-    <div>
-      <h1>hello LoginForm</h1>
-    </div>
-  )
-}
+    const navigate = useNavigate();
 
-export default LoginForm
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+
+    const onSubmit = (data) => {
+        console.log('Login Data:', data);
+        reset();
+
+    };
+
+    return (
+        <Container maxWidth="sm">
+            <Box
+                sx={{
+                    mt: 13,
+                    p: 4,
+                    boxShadow: 3,
+                    borderRadius: 2,
+                    bgcolor: 'background.paper',
+                }}
+            >
+                <Typography variant="h4" align="center" gutterBottom>
+                    Login
+                </Typography>
+
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="Email"
+                        {...register('email')}
+                        error={!!errors.email}
+                        helperText={errors.email?.message}
+                    />
+
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        type="password"
+                        label="Password"
+                        {...register('password')}
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                    />
+
+                    <Button
+                        fullWidth
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        sx={{ mt: 2 }}
+                    >
+                        Login
+                    </Button>
+
+                    <Box textAlign="center" mt={2}>
+                        <Typography variant="body2">
+                            Don't have an account?{' '}
+                            <Link component="button" variant="body2" onClick={() => navigate('/register')}>
+                                Register
+                            </Link>
+                        </Typography>
+                    </Box>
+                </form>
+            </Box>
+        </Container>
+    );
+};
+
+export default LoginForm;
