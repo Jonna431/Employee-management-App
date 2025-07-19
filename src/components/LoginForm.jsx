@@ -23,17 +23,27 @@ const LoginForm = () => {
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
     });
 
     const onSubmit = (data) => {
-        console.log('Login Data:', data);
-        reset();
+        const savedUser = JSON.parse(localStorage.getItem('registeredUser'));
 
+        if (
+            savedUser &&
+            savedUser.email === data.email &&
+            savedUser.password === data.password
+        ) {
+            alert('Login successful!');
+            // Redirect to dashboard/home here
+            console.log(data)
+        } else {
+            alert('Invalid email or password');
+        }
     };
+
 
     return (
         <Container maxWidth="sm">
