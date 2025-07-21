@@ -96,7 +96,7 @@ const CustomCalendar = () => {
   };
 
   return (
-    <div style={{ height: "75vh", padding: "200px" }}>
+    <div style={{ height: "75vh", padding: "200px",paddingTop:'80px' }}>
       <Calendar
         localizer={localizer}
         events={events}

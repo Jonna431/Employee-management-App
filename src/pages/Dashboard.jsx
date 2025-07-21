@@ -1,12 +1,6 @@
 // src/pages/Dashboard.js
 import React from "react";
-import Navbar from "../components/Navbar";
-import {
-  Typography,
-  Box,
-  Paper,
-  Container,
-} from "@mui/material";
+import { Typography, Box, Paper, Container } from "@mui/material";
 
 const Dashboard = () => {
   const dashboardData = [
@@ -37,53 +31,50 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
-      <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 6 }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            gap: 4,
-          }}
-        >
-          {dashboardData.map((item, index) => (
-            <Paper
-              key={index}
-              elevation={6}
-              sx={{
-                flex: "1 1 calc(50% - 32px)",
-                minWidth: "250px",
-                height: 160,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 3,
-                background: item.gradient,
-                color: item.textColor,
-                transition: "transform 0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.03)",
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
-                },
-              }}
+    <Container maxWidth="lg" sx={{ mt: 6 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          gap: 4,
+        }}
+      >
+        {dashboardData.map((item, index) => (
+          <Paper
+            key={index}
+            elevation={6}
+            sx={{
+              flex: "1 1 calc(50% - 32px)",
+              minWidth: "250px",
+              height: 160,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 3,
+              background: item.gradient,
+              color: item.textColor,
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "scale(1.03)",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
+              },
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 600, textAlign: "center" }}
             >
-              <Typography
-                variant="h6"
-                sx={{ fontWeight: 600, textAlign: "center" }}
-              >
-                {item.title}
-              </Typography>
-              <Typography variant="h4" fontWeight="bold" mt={1}>
-                {item.value}
-              </Typography>
-            </Paper>
-          ))}
-        </Box>
-      </Container>
-    </>
+              {item.title}
+            </Typography>
+            <Typography variant="h4" fontWeight="bold" mt={1}>
+              {item.value}
+            </Typography>
+          </Paper>
+        ))}
+      </Box>
+    </Container>
   );
 };
 

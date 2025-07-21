@@ -4,16 +4,16 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-// import Holidays from "./pages/Holidays";
 import TaxCalculations from "./pages/TaxCalculations";
 import LeaveManagement from "./pages/LeaveManagement";
 import Payroll from "./pages/Payroll";
 import EmployeeProfile from "./pages/EmployeeProfile";
 import EditProfileForm from "./pages/EditProfileForm";
 import ApplyLeaveForm from "./pages/ApplyLeaveForm";
+import CalendarComponent from "./pages/Holidays";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import CalendarComponent from "./pages/Holidays";
+import Layout from "./components/Layout"; // ✅ Import layout
 
 const App = () => {
   return (
@@ -24,74 +24,26 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Protected Routes */}
+        {/* Protected Routes under Layout with Navbar */}
         <Route
-          path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Layout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <EmployeeProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/edit-profile"
-          element={
-            <ProtectedRoute>
-              <EditProfileForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/holidays"
-          element={
-            <ProtectedRoute>
-              <CalendarComponent/>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/tax"
-          element={
-            <ProtectedRoute>
-              <TaxCalculations />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/leave"
-          element={
-            <ProtectedRoute>
-              <LeaveManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/apply-leave"
-          element={
-            <ProtectedRoute>
-              <ApplyLeaveForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/payroll"
-          element={
-            <ProtectedRoute>
-              <Payroll />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/profile" element={<EmployeeProfile />} />
+          <Route path="/edit-profile" element={<EditProfileForm />} />
+          <Route path="/holidays" element={<CalendarComponent />} />
+          <Route path="/tax" element={<TaxCalculations />} />
+          <Route path="/leaves" element={<LeaveManagement />} />
+          <Route path="/apply-leave" element={<ApplyLeaveForm />} />
+          <Route path="/payroll" element={<Payroll />} />
+        </Route>
       </Routes>
     </AuthProvider>
   );
-}
+};
 
 export default App;
