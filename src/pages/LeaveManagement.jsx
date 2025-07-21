@@ -39,17 +39,17 @@ const LeaveManagement = () => {
             mb: 3,
           }}
         >
-          <Typography variant="h5" fontWeight={600}>
-            Your Leave Applications
+          <Typography variant="h5" fontWeight={600} sx={{color:'#2a7b8bff'}}>
+            Leaves List
           </Typography>
           <Button
             variant="contained"
             onClick={() => navigate("/apply-leave")}
             sx={{
               textTransform: "none",
-              bgcolor: "#1976d2",
+              bgcolor: "#2a7b8bff",
               "&:hover": {
-                bgcolor: "#125ea2",
+                bgcolor: "#d2cf0aff",
               },
               px: 3,
               py: 1,
