@@ -32,6 +32,7 @@ const Login = () => {
 
     if (user) {
       login(user);
+      // ✅ Redirect to dashboard after successful login
       navigate("/dashboard");
     } else {
       alert("Invalid credentials");
