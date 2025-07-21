@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Holidays from "./pages/Holidays";
+// import Holidays from "./pages/Holidays";
 import TaxCalculations from "./pages/TaxCalculations";
 import LeaveManagement from "./pages/LeaveManagement";
 import Payroll from "./pages/Payroll";
@@ -13,6 +13,7 @@ import EditProfileForm from "./pages/EditProfileForm";
 import ApplyLeaveForm from "./pages/ApplyLeaveForm";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CalendarComponent from "./pages/Holidays";
 
 const App = () => {
   return (
@@ -52,7 +53,7 @@ const App = () => {
           path="/holidays"
           element={
             <ProtectedRoute>
-              <Holidays />
+              <CalendarComponent/>
             </ProtectedRoute>
           }
         />
