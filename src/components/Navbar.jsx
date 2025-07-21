@@ -54,7 +54,7 @@ const Navbar = () => {
                   fontWeight: 500,
                   "&:hover": {
                     // textDecoration: "underline",
-                    color: "#d7b50bff",
+                    color: "#dab708ff",
                   },
                 }}
               >

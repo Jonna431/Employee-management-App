@@ -61,7 +61,7 @@ const ApplyLeaveForm = () => {
         <CardContent sx={{ p: 4 }}>
           <Typography
             variant="h5"
-            sx={{ fontWeight: 600, textAlign: "center", mb: 3 }}
+            sx={{ fontWeight: 600, textAlign: "center", mb: 3 ,color:'#2a7b8bff'}}
           >
             Apply for Leave
           </Typography>
@@ -143,7 +143,7 @@ const ApplyLeaveForm = () => {
                       fullWidth
                       type="submit"
                       variant="contained"
-                      sx={{ py: 1, fontWeight: 600, borderRadius: 2 }}
+                      sx={{ py: 1, fontWeight: 600, borderRadius: 2 ,backgroundColor:'#2a7b8bff'}}
                     >
                       Submit
                     </Button>
