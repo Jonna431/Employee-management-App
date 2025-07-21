@@ -1,0 +1,33 @@
+.rbc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.rbc-btn-group button {
+  background-color: #f5f5f5;
+  color: #080808;
+  padding: 6px 12px;
+  margin: 0 2px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.rbc-btn-group button:hover {
+  background-color: #08b5b2;
+  color: white;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.rbc-btn-group button:active {
+  background-color: #0681a3;
+  color: #fff;
+}
+
+.rbc-btn-group button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.3);
+}
