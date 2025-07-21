@@ -13,10 +13,12 @@ import { AuthContext } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
 
 const navItems = [
+  { name: "Home", path: "/home" },
   { name: "Holidays", path: "/holidays" },
-  { name: "Leave Management", path: "/leave" },
+  { name: "Leave Management", path: "/leaves" },
   { name: "Tax Calculations", path: "/tax" },
   { name: "Payroll", path: "/payroll" },
+  { name: "Login", path: "/" },
 ];
 
 const Navbar = () => {
@@ -52,7 +54,7 @@ const Navbar = () => {
                   fontWeight: 500,
                   "&:hover": {
                     // textDecoration: "underline",
-                    color: "#0c0c0cff",
+                    color: "#d7b50bff",
                   },
                 }}
               >
