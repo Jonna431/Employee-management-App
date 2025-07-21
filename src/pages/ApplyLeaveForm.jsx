@@ -1,4 +1,3 @@
-// src/pages/ApplyLeaveForm.js
 import React, { useContext } from "react";
 import {
   Container,
@@ -7,6 +6,8 @@ import {
   Typography,
   MenuItem,
   Grid,
+  Card,
+  CardContent,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -49,93 +50,110 @@ const ApplyLeaveForm = () => {
       appliedDate: new Date().toLocaleDateString(),
     };
 
-    saveLeave(leave); // Save leave using utility function
+    saveLeave(leave);
     reset();
-    navigate("/dashboard/leave"); // Redirect to leave list page
+    navigate("/dashboard/leave");
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        Apply for Leave
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              type="date"
-              label="Start Date"
-              InputLabelProps={{ shrink: true }}
-              {...register("startDate")}
-              error={!!errors.startDate}
-              helperText={errors.startDate?.message}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              type="date"
-              label="End Date"
-              InputLabelProps={{ shrink: true }}
-              {...register("endDate")}
-              error={!!errors.endDate}
-              helperText={errors.endDate?.message}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Number of Days"
-              type="number"
-              {...register("days")}
-              error={!!errors.days}
-              helperText={errors.days?.message}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              select
-              label="Leave Type"
-              {...register("type")}
-              error={!!errors.type}
-              helperText={errors.type?.message}
-            >
-              <MenuItem value="Sick Leave">Sick Leave</MenuItem>
-              <MenuItem value="Casual Leave">Casual Leave</MenuItem>
-              <MenuItem value="Earned Leave">Earned Leave</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Location"
-              {...register("location")}
-              error={!!errors.location}
-              helperText={errors.location?.message}
-            />
-          </Grid>
-        </Grid>
+    <Container maxWidth="sm" sx={{ mt: 5 }}>
+      <Card elevation={3} sx={{ borderRadius: 3 }}>
+        <CardContent sx={{ p: 4 }}>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 600, textAlign: "center", mb: 3 }}
+          >
+            Apply for Leave
+          </Typography>
 
-        <Grid container spacing={2} sx={{ mt: 2 }}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              variant="outlined"
-              color="secondary"
-              onClick={() => navigate("/dashboard/leave")}
-            >
-              Cancel
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button fullWidth variant="contained" type="submit">
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Grid container spacing={3} direction="column">
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  type="date"
+                  label="Start Date"
+                  InputLabelProps={{ shrink: true }}
+                  {...register("startDate")}
+                  error={!!errors.startDate}
+                  helperText={errors.startDate?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  type="date"
+                  label="End Date"
+                  InputLabelProps={{ shrink: true }}
+                  {...register("endDate")}
+                  error={!!errors.endDate}
+                  helperText={errors.endDate?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  label="Number of Days"
+                  {...register("days")}
+                  error={!!errors.days}
+                  helperText={errors.days?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Leave Type"
+                  {...register("type")}
+                  error={!!errors.type}
+                  helperText={errors.type?.message}
+                >
+                  <MenuItem value="Sick Leave">Sick Leave</MenuItem>
+                  <MenuItem value="Casual Leave">Casual Leave</MenuItem>
+                  <MenuItem value="Earned Leave">Earned Leave</MenuItem>
+                </TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Location"
+                  {...register("location")}
+                  error={!!errors.location}
+                  helperText={errors.location?.message}
+                />
+              </Grid>
+
+              {/* Side-by-side buttons */}
+              <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => navigate("/dashboard/leave")}
+                      sx={{ py: 1, fontWeight: 600, borderRadius: 2 }}
+                    >
+                      Cancel
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      type="submit"
+                      variant="contained"
+                      sx={{ py: 1, fontWeight: 600, borderRadius: 2 }}
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
     </Container>
   );
 };

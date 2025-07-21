@@ -9,6 +9,7 @@ import {
   TableRow,
   Button,
   Box,
+  Paper,
 } from "@mui/material";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -28,51 +29,75 @@ const LeaveManagement = () => {
   }, [user.email]);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 2,
-        }}
-      >
-        <Typography variant="h5">Your Leave Applications</Typography>
-        <Button variant="contained" onClick={() => navigate("/apply-leave")}>
-          Apply for Leave
-        </Button>
-      </Box>
+    <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 3,
+          }}
+        >
+          <Typography variant="h5" fontWeight={600}>
+            Your Leave Applications
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => navigate("/apply-leave")}
+            sx={{
+              textTransform: "none",
+              bgcolor: "#1976d2",
+              "&:hover": {
+                bgcolor: "#125ea2",
+              },
+              px: 3,
+              py: 1,
+              fontWeight: 500,
+            }}
+          >
+            Apply for Leave
+          </Button>
+        </Box>
 
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>S.No.</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Leave Type</TableCell>
-            <TableCell>Applied On</TableCell>
-            <TableCell>No. of Days</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {leaves.length > 0 ? (
-            leaves.map((leave, index) => (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{leave.name}</TableCell>
-                <TableCell>{leave.type}</TableCell>
-                <TableCell>{leave.appliedDate}</TableCell>
-                <TableCell>{leave.days}</TableCell>
-              </TableRow>
-            ))
-          ) : (
+        <Table>
+          <TableHead sx={{ backgroundColor: "#f5f5f5" }}>
             <TableRow>
-              <TableCell colSpan={5} align="center">
-                No leave applications found.
-              </TableCell>
+              <TableCell>S.No.</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Leave Type</TableCell>
+              <TableCell>Applied On</TableCell>
+              <TableCell>No. of Days</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {leaves.length > 0 ? (
+              leaves.map((leave, index) => (
+                <TableRow
+                  key={index}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#f0f4ff",
+                    },
+                  }}
+                >
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{leave.name}</TableCell>
+                  <TableCell>{leave.type}</TableCell>
+                  <TableCell>{leave.appliedDate}</TableCell>
+                  <TableCell>{leave.days}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  No leave applications found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
     </Container>
   );
 };
