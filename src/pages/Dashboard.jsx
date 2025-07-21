@@ -1,49 +1,44 @@
 // src/pages/Dashboard.js
 import React from "react";
 import Navbar from "../components/Navbar";
-
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Box,
-  Avatar,
   Paper,
   Container,
 } from "@mui/material";
-import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const dashboardData = [
     {
       title: "Total Working Days",
       value: "220",
-      gradient: "linear-gradient(135deg, #e3f2fd 50%, #ffffff 50%)", // Light blue → white
+      gradient: "linear-gradient(135deg, #e3f2fd 50%, #ffffff 50%)",
       textColor: "#1976d2",
     },
     {
       title: "Leave Taken",
       value: "12",
-      gradient: "linear-gradient(135deg, #fce4ec 50%, #ffffff 50%)", // Pink → white
+      gradient: "linear-gradient(135deg, #fce4ec 50%, #ffffff 50%)",
       textColor: "#d81b60",
     },
     {
       title: "Salary Processed",
       value: "₹6,50,000",
-      gradient: "linear-gradient(135deg, #e8f5e9 50%, #ffffff 50%)", // Green → white
+      gradient: "linear-gradient(135deg, #e8f5e9 50%, #ffffff 50%)",
       textColor: "#388e3c",
     },
     {
       title: "Upcoming Holidays",
       value: "3",
-      gradient: "linear-gradient(135deg, #fff9c4 50%, #ffffff 50%)", // Yellow → white
+      gradient: "linear-gradient(135deg, #fff9c4 50%, #ffffff 50%)",
       textColor: "#080807ff",
     },
   ];
+
   return (
     <>
       <Navbar />
-      {/* Dashboard Cards */}
       <Container maxWidth="lg" sx={{ mt: 6 }}>
         <Box
           sx={{
@@ -88,7 +83,6 @@ const Dashboard = () => {
           ))}
         </Box>
       </Container>
-      {/* <Outlet /> */}
     </>
   );
 };
