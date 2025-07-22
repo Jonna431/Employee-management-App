@@ -56,12 +56,12 @@ const ApplyLeaveForm = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 5 }}>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Card elevation={3} sx={{ borderRadius: 3 }}>
         <CardContent sx={{ p: 4 }}>
           <SectionTitle title="Apply for Leaves" />
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Grid container spacing={3} direction="column">
+            <Grid container spacing={2} direction="column">
               <Grid item xs={12}>
                 <CustomTextField
                   fullWidth
