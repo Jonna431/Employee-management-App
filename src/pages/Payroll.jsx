@@ -17,8 +17,7 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Link,
-  Box,
+  Link
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import html2pdf from "html2pdf.js";

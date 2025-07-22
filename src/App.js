@@ -13,13 +13,12 @@ import ApplyLeaveForm from "./pages/ApplyLeaveForm";
 import CalendarComponent from "./pages/Holidays";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Layout from "./components/Layout"; // ✅ Import layout
+import Layout from "./components/Layout"; 
 
 const App = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

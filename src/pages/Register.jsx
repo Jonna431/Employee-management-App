@@ -1,7 +1,6 @@
 // src/pages/Register.js
 import React from "react";
 import {
-  TextField,
   Button,
   Container,
   Typography,
@@ -11,6 +10,8 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import CustomTextField from "../pages/CustomTextField"; // Import custom component
+import SectionTitle from "./SectionTitle";
 
 // Validation schema
 const schema = yup.object().shape({
@@ -52,55 +53,40 @@ const Register = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
-        <Typography
-          variant="h4"
-          align="center"
-          gutterBottom
-          sx={{ fontWeight: 600 ,color:'#2a7b8bff'}}
-        >
-          Employee Registration
-        </Typography>
+        <SectionTitle title='Employee Registration' />
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <TextField
+          <CustomTextField
             label="Full Name"
-            fullWidth
-            margin="normal"
-            {...register("fullName")}
-            error={!!errors.fullName}
-            helperText={errors.fullName?.message}
+            name="fullName"
+            register={register}
+            error={errors.fullName}
           />
-          <TextField
+          <CustomTextField
             label="Email"
-            fullWidth
-            margin="normal"
-            {...register("email")}
-            error={!!errors.email}
-            helperText={errors.email?.message}
+            name="email"
+            register={register}
+            error={errors.email}
           />
-          <TextField
+          <CustomTextField
             label="Password"
+            name="password"
             type="password"
-            fullWidth
-            margin="normal"
-            {...register("password")}
-            error={!!errors.password}
-            helperText={errors.password?.message}
+            register={register}
+            error={errors.password}
           />
-          <TextField
+          <CustomTextField
             label="Confirm Password"
+            name="confirmPassword"
             type="password"
-            fullWidth
-            margin="normal"
-            {...register("confirmPassword")}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message}
+            register={register}
+            error={errors.confirmPassword}
           />
           <Button
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 3, py: 1 ,backgroundColor:'#2a7b8bff'}}
+            sx={{ mt: 3, py: 1, backgroundColor: "#2a7b8bff" }}
           >
             Register
           </Button>

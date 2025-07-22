@@ -1,10 +1,8 @@
-// src/pages/Home.js
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Container,
   Typography,
-  TextField,
   Box,
   Paper,
 } from "@mui/material";
@@ -13,8 +11,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import CustomTextField from "../pages/CustomTextField";
+import SectionTitle from "./SectionTitle";
 
-// Validation schema
+// ✅ Validation schema
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().required("Password is required"),
@@ -23,6 +23,7 @@ const schema = yup.object().shape({
 const Home = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
 
   const {
     register,
@@ -37,20 +38,18 @@ const Home = () => {
     );
 
     if (user) {
+      setLoginError("");
       login(user);
       navigate("/home");
     } else {
-      alert("Invalid credentials");
+      setLoginError("Invalid email or password");
     }
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       {/* Heading */}
-      <Typography variant="h4" align="center" gutterBottom color="#2a7b8bff">
-        Employee Management App
-      </Typography>
-
+      <SectionTitle title=' Employee Management App' />
       {/* Login Card */}
       <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
         <Typography variant="h5" gutterBottom align="center">
@@ -59,24 +58,32 @@ const Home = () => {
 
         {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <TextField
+          <CustomTextField
             label="Email"
-            fullWidth
-            margin="normal"
-            {...register("email")}
-            error={!!errors.email}
-            helperText={errors.email?.message}
+            name="email"
+            register={register}
+            error={errors.email}
           />
-          <TextField
+          <CustomTextField
             label="Password"
+            name="password"
             type="password"
-            fullWidth
-            margin="normal"
-            {...register("password")}
-            error={!!errors.password}
-            helperText={errors.password?.message}
+            register={register}
+            error={errors.password}
           />
-          <Button type="submit"  variant="contained" fullWidth  sx={{ mt: 2 ,backgroundColor:'#2a7b8bff'}}>
+
+          {loginError && (
+            <Typography color="error" variant="body2" align="center" sx={{ mt: 1 }}>
+              {loginError}
+            </Typography>
+          )}
+
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2, backgroundColor: "#2a7b8bff" }}
+          >
             Login
           </Button>
         </form>
@@ -93,9 +100,7 @@ const Home = () => {
 
         {/* HR Login Button */}
         <Box mt={2} textAlign="center">
-          <Button variant="outlined" >
-            HR Login (Coming Soon)
-          </Button>
+          <Button variant="outlined">HR Login (Coming Soon)</Button>
         </Box>
       </Paper>
     </Container>
