@@ -17,8 +17,7 @@ const navItems = [
   { name: "Holidays", path: "/holidays" },
   { name: "Leave Management", path: "/leaves" },
   { name: "Tax Calculations", path: "/tax" },
-  { name: "Payroll", path: "/payroll" },
-  { name: "Login", path: "/" },
+  { name: "Payroll", path: "/payroll" }
 ];
 
 const Navbar = () => {

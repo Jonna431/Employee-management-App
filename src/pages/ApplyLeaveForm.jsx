@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
+import SectionTitle from "./SectionTitle";
 import {
   Container,
-  TextField,
   Button,
-  Typography,
   MenuItem,
   Grid,
   Card,
@@ -15,6 +14,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { saveLeave } from "../utils/storage";
+import CustomTextField from "./CustomTextField"; // ✅ Custom text field
 
 const schema = yup.object().shape({
   startDate: yup.date().required("Start date is required"),
@@ -59,68 +59,62 @@ const ApplyLeaveForm = () => {
     <Container maxWidth="sm" sx={{ mt: 5 }}>
       <Card elevation={3} sx={{ borderRadius: 3 }}>
         <CardContent sx={{ p: 4 }}>
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: 600, textAlign: "center", mb: 3 ,color:'#2a7b8bff'}}
-          >
-            Apply for Leave
-          </Typography>
-
+          <SectionTitle title="Apply for Leaves" />
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <Grid container spacing={3} direction="column">
               <Grid item xs={12}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   type="date"
                   label="Start Date"
+                  name="startDate"
+                  register={register}
+                  error={errors.startDate}
                   InputLabelProps={{ shrink: true }}
-                  {...register("startDate")}
-                  error={!!errors.startDate}
-                  helperText={errors.startDate?.message}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   type="date"
                   label="End Date"
+                  name="endDate"
+                  register={register}
+                  error={errors.endDate}
                   InputLabelProps={{ shrink: true }}
-                  {...register("endDate")}
-                  error={!!errors.endDate}
-                  helperText={errors.endDate?.message}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   type="number"
                   label="Number of Days"
-                  {...register("days")}
-                  error={!!errors.days}
-                  helperText={errors.days?.message}
+                  name="days"
+                  register={register}
+                  error={errors.days}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   select
                   label="Leave Type"
-                  {...register("type")}
-                  error={!!errors.type}
-                  helperText={errors.type?.message}
+                  name="type"
+                  register={register}
+                  error={errors.type}
                 >
                   <MenuItem value="Sick Leave">Sick Leave</MenuItem>
                   <MenuItem value="Casual Leave">Casual Leave</MenuItem>
                   <MenuItem value="Earned Leave">Earned Leave</MenuItem>
-                </TextField>
+                </CustomTextField>
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   label="Location"
-                  {...register("location")}
-                  error={!!errors.location}
-                  helperText={errors.location?.message}
+                  name="location"
+                  register={register}
+                  error={errors.location}
                 />
               </Grid>
 
@@ -143,7 +137,12 @@ const ApplyLeaveForm = () => {
                       fullWidth
                       type="submit"
                       variant="contained"
-                      sx={{ py: 1, fontWeight: 600, borderRadius: 2 ,backgroundColor:'#2a7b8bff'}}
+                      sx={{
+                        py: 1,
+                        fontWeight: 600,
+                        borderRadius: 2,
+                        backgroundColor: "#2a7b8bff",
+                      }}
                     >
                       Submit
                     </Button>

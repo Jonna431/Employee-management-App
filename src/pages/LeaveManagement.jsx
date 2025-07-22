@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+import SectionTitle from "./SectionTitle";
 import {
   Container,
-  Typography,
   Table,
   TableBody,
   TableCell,
@@ -39,9 +39,7 @@ const LeaveManagement = () => {
             mb: 3,
           }}
         >
-          <Typography variant="h5" fontWeight={600} sx={{color:'#2a7b8bff'}}>
-            Leaves List
-          </Typography>
+          <SectionTitle title='Leaves List' />
           <Button
             variant="contained"
             onClick={() => navigate("/apply-leave")}
