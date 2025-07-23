@@ -44,7 +44,7 @@ const EditProfileForm = () => {
     );
     localStorage.setItem("employee-users", JSON.stringify(updatedUsers));
     login({ ...user, ...data }); // update context
-    navigate("/dashboard");
+    navigate("/home");
   };
 
   return (

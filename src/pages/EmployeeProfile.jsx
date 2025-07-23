@@ -9,22 +9,43 @@ const EmployeeProfile = () => {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 600, margin: "2rem auto", p: 2 }}>
+    <Card sx={{ maxWidth: 500, margin: "2rem auto", p: 3 }}>
       <CardContent>
-        <Typography variant="h5">{user.fullName}</Typography>
-        <Typography>Email: {user.email}</Typography>
-        {user.designation && (
-          <Typography>Designation: {user.designation}</Typography>
-        )}
-        {user.department && (
-          <Typography>Department: {user.department}</Typography>
-        )}
-        {user.phone && <Typography>Phone: {user.phone}</Typography>}
-        {user.gender && <Typography>Gender: {user.gender}</Typography>}
+        <Typography variant="h4" align="center" gutterBottom>
+          {user.fullName}
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          gutterBottom
+        >
+          {user.designation || "Employee"}
+        </Typography>
+        <div style={{ marginTop: 24 }}>
+          <Typography variant="body1" gutterBottom>
+            <strong>Email:</strong> {user.email}
+          </Typography>
+          {user.department && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Department:</strong> {user.department}
+            </Typography>
+          )}
+          {user.phone && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Phone:</strong> {user.phone}
+            </Typography>
+          )}
+          {user.gender && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Gender:</strong> {user.gender}
+            </Typography>
+          )}
+        </div>
         <Button
-          variant="outlined"
-          sx={{ mt: 2 }}
-          onClick={() => navigate("/dashboard/edit-profile")}
+          variant="contained"
+          sx={{ mt: 3, display: "block", mx: "auto" }}
+          onClick={() => navigate("/edit-profile")}
         >
           Edit Profile
         </Button>

@@ -155,6 +155,16 @@ mail-to:info@dentassure.in`}
           <Typography fontWeight="bold">Net Salary</Typography>
           <Typography fontWeight="bold">{data.netSalary}</Typography>
         </Box>
+        <Typography
+          variant="body2"
+          sx={{ color: "#999", textAlign: "center", mt: 2 }}
+        >
+          Notice: This payslip has been generated electronically by{" "}
+          <strong style={{ color: "red" }}>DENT</strong>
+          <strong style={{ color: "black" }}>ASSURE</strong>. No signature is
+          necessary. This document is valid and may be used as an official
+          record.
+        </Typography>
       </CardContent>
     </Card>
   );
