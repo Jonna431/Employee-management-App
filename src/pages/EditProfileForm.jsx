@@ -49,7 +49,7 @@ const EditProfileForm = () => {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom sx={{color:'#2a7b8bff'}}>
         Edit Your Profile
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,7 +139,7 @@ const EditProfileForm = () => {
           error={!!errors.department}
           helperText={errors.department?.message}
         />
-        <Button variant="contained" fullWidth type="submit" sx={{ mt: 2 }}>
+        <Button variant="contained" fullWidth type="submit" sx={{ mt: 2 ,backgroundColor:'#2a7b8bff'}}>
           Update
         </Button>
       </form>

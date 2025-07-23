@@ -27,8 +27,8 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
         minHeight: "450px",
         m: 2,
         borderRadius: 3,
-        boxShadow: 4,
-        bgcolor: "#f8f4f8ef",
+        boxShadow: 6,
+        bgcolor: "#f0f3f3d5",
       }}
     >
       <CardHeader

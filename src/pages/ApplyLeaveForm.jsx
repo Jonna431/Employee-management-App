@@ -126,7 +126,7 @@ const ApplyLeaveForm = () => {
                       fullWidth
                       variant="outlined"
                       color="secondary"
-                      onClick={() => navigate("/dashboard/leave")}
+                      onClick={() => navigate("/leaves")}
                       sx={{ py: 1, fontWeight: 600, borderRadius: 2 }}
                     >
                       Cancel
