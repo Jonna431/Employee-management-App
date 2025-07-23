@@ -23,6 +23,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Logo from "../assets/logo1.png";
+import SectionTitle from "./SectionTitle";
 
 const PRIMARY_COLOR = "#1976D2";
 
@@ -170,13 +171,7 @@ const TaxCalculations = () => {
         <img src={Logo} alt="Company Logo" style={{ maxHeight: 60 }} />
       </Box>
 
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ color: PRIMARY_COLOR, textAlign: "center" }}
-      >
-        Income Tax Calculator FY 2024-25
-      </Typography>
+     <SectionTitle title=' Income Tax Calculator FY 2024-25'/>
 
       {/* Form */}
       <Paper sx={{ p: 3, m: 3 }} elevation={3}>
@@ -233,6 +228,7 @@ const TaxCalculations = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                sx={{backgroundColor:'#2a7b8bff'}}
               >
                 Calculate Tax
               </Button>

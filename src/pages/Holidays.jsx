@@ -1,6 +1,8 @@
+// CustomCalendar.jsx
 import React, { useState, useEffect } from "react";
 import "./CustomCalendar.css";
 import SectionTitle from "./SectionTitle";
+import UpcomingHolidays from "./UpcomingHolidays";
 import {
   Calendar,
   momentLocalizer,
@@ -9,12 +11,15 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
   Dialog,
+  Box,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
   TextField,
   Typography,
+  Card,
+  CardContent,
 } from "@mui/material";
 
 const localizer = momentLocalizer(moment);
@@ -24,71 +29,68 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-// Month-wise holidays
 const getDefaultEvents = (monthStart) => {
   const year = monthStart.getFullYear();
   const month = monthStart.getMonth();
-
   const holidaysByMonth = {
-    0: [ // January
+    0: [
       { title: "New Year's Day", day: 1, color: "#E91E63" },
       { title: "Pongal", day: 14, color: "#4CAF50" },
     ],
-    1: [ // February
+    1: [
       { title: "Vasant Panchami", day: 5, color: "#3F51B5" },
       { title: "Maha Shivaratri", day: 19, color: "#009688" },
     ],
-    2: [ // March
+    2: [
       { title: "Holi", day: 8, color: "#FFC107" },
       { title: "Ram Navami", day: 25, color: "#FF5722" },
     ],
-    3: [ // April
+    3: [
       { title: "Good Friday", day: 7, color: "#795548" },
       { title: "Ambedkar Jayanti", day: 14, color: "#9C27B0" },
     ],
-    4: [ // May
+    4: [
       { title: "Labour Day", day: 1, color: "#607D8B" },
       { title: "Eid al-Fitr", day: 10, color: "#FF9800" },
     ],
-    5: [ // June
+    5: [
       { title: "Environment Day", day: 5, color: "#4CAF50" },
       { title: "Father’s Day", day: 16, color: "#9E9E9E" },
     ],
-    6: [ // July
+    6: [
       { title: "Guru Purnima", day: 21, color: "#03A9F4" },
     ],
-    7: [ // August
+    7: [
       { title: "Independence Day", day: 15, color: "#2196F3" },
       { title: "Raksha Bandhan", day: 19, color: "#FFEB3B" },
       { title: "Janmashtami", day: 26, color: "#673AB7" },
     ],
-    8: [ // September
-      { title: "Ganesh Chaturthi", day: 7, color: "#CDDC39" },
+    8: [
       { title: "Teachers' Day", day: 5, color: "#FF9800" },
+      { title: "Ganesh Chaturthi", day: 7, color: "#CDDC39" },
     ],
-    9: [ // October
+    9: [
       { title: "Gandhi Jayanti", day: 2, color: "#00BCD4" },
       { title: "Dussehra", day: 20, color: "#F44336" },
     ],
-    10: [ // November
+    10: [
       { title: "Diwali", day: 3, color: "#FF5722" },
       { title: "Bhai Dooj", day: 5, color: "#8BC34A" },
       { title: "Guru Nanak Jayanti", day: 27, color: "#009688" },
     ],
-    11: [ // December
+    11: [
       { title: "Christmas", day: 25, color: "#F44336" },
       { title: "New Year’s Eve", day: 31, color: "#3F51B5" },
     ],
   };
-
   const holidays = holidaysByMonth[month] || [];
-
-  return holidays.map((holiday, index) => ({
-    id: Date.now() + index,
+  return holidays.map((holiday) => ({
+    id: `holiday-${year}-${month}-${holiday.day}`,
     title: holiday.title,
     start: new Date(year, month, holiday.day),
     end: new Date(year, month, holiday.day),
     color: holiday.color,
+    isHoliday: true,
   }));
 };
 
@@ -103,33 +105,24 @@ const CustomCalendar = () => {
 
   useEffect(() => {
     const saved = localStorage.getItem("calendarEvents");
+    let parsed = [];
     if (saved) {
-      const parsed = JSON.parse(saved).map(e => ({
+      parsed = JSON.parse(saved).map((e) => ({
         ...e,
         start: new Date(e.start),
         end: new Date(e.end),
       }));
-      setEvents(parsed);
     }
-  }, []);
 
-  useEffect(() => {
     const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const holidayEvents = getDefaultEvents(monthStart);
+    const eventKeys = new Set(parsed.map((e) => e.id));
+    const filteredHolidays = holidayEvents.filter((h) => !eventKeys.has(h.id));
 
-    const hasEventsThisMonth = events.some(event =>
-      event.start >= monthStart && event.start <= monthEnd
-    );
-
-    if (!hasEventsThisMonth) {
-      const defaults = getDefaultEvents(monthStart);
-      const updated = [...events, ...defaults];
-      setEvents(updated);
-      localStorage.setItem("calendarEvents", JSON.stringify(updated));
-    }
-    // ✅ include 'events' dependency
-  }, [currentDate, events]);
-
+    const updated = [...parsed, ...filteredHolidays];
+    setEvents(updated);
+    localStorage.setItem("calendarEvents", JSON.stringify(updated));
+  }, [currentDate]);
 
   const handleSelectSlot = (slotInfo) => {
     setSelectedSlot(slotInfo);
@@ -139,15 +132,13 @@ const CustomCalendar = () => {
 
   const handleAddEvent = () => {
     if (!eventName || !selectedSlot) return;
-
     const newEvent = {
-      id: Date.now(),
+      id: `event-${Date.now()}`,
       title: eventName,
       start: new Date(selectedSlot.start),
       end: new Date(selectedSlot.end),
       color: getRandomColor(),
     };
-
     const updatedEvents = [...events, newEvent];
     setEvents(updatedEvents);
     localStorage.setItem("calendarEvents", JSON.stringify(updatedEvents));
@@ -182,25 +173,42 @@ const CustomCalendar = () => {
   };
 
   return (
-    <div style={{ height: "75vh", padding: "180px", paddingTop: '40px' }}>
+    <Card
+      sx={{
+        mx: "auto",
+        mt: 3,
+        width: "85%",
+        p: 2,
+        pb:14,
+        pr:6,
+        borderRadius: 3,
+        boxShadow: 6,
+        backgroundColor: "#ffffffdd",
+      }}
+    >
+      <CardContent>
+        <Box sx={{ display: "flex", flexDirection: "row", height: "60vh", width: "100%", px: 2 }}>
+          <UpcomingHolidays events={events} currentMonth={currentDate.getMonth()} />
+          <Box sx={{ flex: 1, pl: 2 }}>
+            <SectionTitle title=" 🏢 Team Calendar" />
+            <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              selectable
+              views={["month", "week", "day"]}
+              onSelectSlot={handleSelectSlot}
+              onSelectEvent={handleSelectEvent}
+              onNavigate={(date) => setCurrentDate(date)}
+              style={{ height: "100%" }}
+              eventPropGetter={eventStyleGetter}
+            />
+          </Box>
+        </Box>
+      </CardContent>
 
-      <SectionTitle title=" 🏢 Team Calendar" />
-
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        selectable
-        views={["month", "week", "day"]}
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-        onNavigate={(date) => setCurrentDate(date)}
-        style={{ height: "100%" }}
-        eventPropGetter={eventStyleGetter}
-      />
-
-      {/* Add Event Dialog */}
+      {/* Dialogs (Add & View Event) */}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Add Event</DialogTitle>
         <DialogContent>
@@ -219,22 +227,22 @@ const CustomCalendar = () => {
         </DialogActions>
       </Dialog>
 
-      {/* View Event Dialog */}
       <Dialog open={openView} onClose={() => setOpenView(false)}>
         <DialogTitle>Event Details</DialogTitle>
         <DialogContent>
           <Typography variant="h6">{selectedEvent?.title}</Typography>
           <Typography>
-            {moment(selectedEvent?.start).format("LLL")} -{" "}
-            {moment(selectedEvent?.end).format("LLL")}
+            {moment(selectedEvent?.start).format("LLL")} - {moment(selectedEvent?.end).format("LLL")}
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenView(false)} color="primary">Close</Button>
-          <Button onClick={handleDeleteEvent} color="error" variant="contained">Delete</Button>
+          {!selectedEvent?.isHoliday && (
+            <Button onClick={handleDeleteEvent} color="error" variant="contained">Delete</Button>
+          )}
         </DialogActions>
       </Dialog>
-    </div>
+    </Card>
   );
 };
 
