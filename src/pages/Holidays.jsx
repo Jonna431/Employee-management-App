@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CustomCalendar.css";
 import SectionTitle from "./SectionTitle";
-import {
-  Calendar,
-  momentLocalizer,
-} from "react-big-calendar";
+import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
@@ -24,71 +21,44 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-// Month-wise holidays
-const getDefaultEvents = (monthStart) => {
-  const year = monthStart.getFullYear();
-  const month = monthStart.getMonth();
-
+// 🏖️ Default holidays per month
+const getDefaultHolidaysForMonth = (year, month) => {
   const holidaysByMonth = {
-    0: [ // January
+    0: [
       { title: "New Year's Day", day: 1, color: "#E91E63" },
       { title: "Pongal", day: 14, color: "#4CAF50" },
+      { title: "Republic Day", day: 26, color: "#3F51B5" },
     ],
-    1: [ // February
-      { title: "Vasant Panchami", day: 5, color: "#3F51B5" },
-      { title: "Maha Shivaratri", day: 19, color: "#009688" },
+    1: [
+      { title: "Maha Shivaratri", day: 18, color: "#009688" },
     ],
-    2: [ // March
+    2: [
       { title: "Holi", day: 8, color: "#FFC107" },
       { title: "Ram Navami", day: 25, color: "#FF5722" },
     ],
-    3: [ // April
-      { title: "Good Friday", day: 7, color: "#795548" },
-      { title: "Ambedkar Jayanti", day: 14, color: "#9C27B0" },
-    ],
-    4: [ // May
-      { title: "Labour Day", day: 1, color: "#607D8B" },
-      { title: "Eid al-Fitr", day: 10, color: "#FF9800" },
-    ],
-    5: [ // June
-      { title: "Environment Day", day: 5, color: "#4CAF50" },
-      { title: "Father’s Day", day: 16, color: "#9E9E9E" },
-    ],
-    6: [ // July
-      { title: "Guru Purnima", day: 21, color: "#03A9F4" },
-    ],
-    7: [ // August
-      { title: "Independence Day", day: 15, color: "#2196F3" },
-      { title: "Raksha Bandhan", day: 19, color: "#FFEB3B" },
-      { title: "Janmashtami", day: 26, color: "#673AB7" },
-    ],
-    8: [ // September
-      { title: "Ganesh Chaturthi", day: 7, color: "#CDDC39" },
-      { title: "Teachers' Day", day: 5, color: "#FF9800" },
-    ],
-    9: [ // October
+    
+    9: [
       { title: "Gandhi Jayanti", day: 2, color: "#00BCD4" },
-      { title: "Dussehra", day: 20, color: "#F44336" },
+      { title: "Dussehra", day: 24, color: "#F44336" },
     ],
-    10: [ // November
-      { title: "Diwali", day: 3, color: "#FF5722" },
-      { title: "Bhai Dooj", day: 5, color: "#8BC34A" },
-      { title: "Guru Nanak Jayanti", day: 27, color: "#009688" },
+    10: [
+      { title: "Diwali", day: 12, color: "#FF9800" },
+      { title: "Children's Day", day: 14, color: "#03A9F4" },
     ],
-    11: [ // December
+    11: [
       { title: "Christmas", day: 25, color: "#F44336" },
       { title: "New Year’s Eve", day: 31, color: "#3F51B5" },
     ],
   };
 
   const holidays = holidaysByMonth[month] || [];
-
-  return holidays.map((holiday, index) => ({
-    id: Date.now() + index,
-    title: holiday.title,
-    start: new Date(year, month, holiday.day),
-    end: new Date(year, month, holiday.day),
-    color: holiday.color,
+  return holidays.map((h) => ({
+    id: `holiday-${year}-${month}-${h.day}`,
+    title: h.title,
+    start: new Date(year, month, h.day),
+    end: new Date(year, month, h.day),
+    color: h.color,
+    isHoliday: true,
   }));
 };
 
@@ -101,35 +71,34 @@ const CustomCalendar = () => {
   const [openView, setOpenView] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  // 🧠 Load from localStorage on first render
   useEffect(() => {
-    const saved = localStorage.getItem("calendarEvents");
-    if (saved) {
-      const parsed = JSON.parse(saved).map(e => ({
-        ...e,
-        start: new Date(e.start),
-        end: new Date(e.end),
-      }));
-      setEvents(parsed);
-    }
+    const saved = JSON.parse(localStorage.getItem("calendarEvents")) || [];
+    const parsed = saved.map((e) => ({
+      ...e,
+      start: new Date(e.start),
+      end: new Date(e.end),
+    }));
+    setEvents(parsed);
   }, []);
 
+  // 🌟 Add holidays if missing for the month
   useEffect(() => {
-    const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const holidays = getDefaultHolidaysForMonth(year, month);
 
-    const hasEventsThisMonth = events.some(event =>
-      event.start >= monthStart && event.start <= monthEnd
+    const existing = events.filter((e) => e.isHoliday);
+    const hasHoliday = holidays.some((h) =>
+      existing.find((e) => e.id === h.id)
     );
 
-    if (!hasEventsThisMonth) {
-      const defaults = getDefaultEvents(monthStart);
-      const updated = [...events, ...defaults];
-      setEvents(updated);
-      localStorage.setItem("calendarEvents", JSON.stringify(updated));
+    if (!hasHoliday) {
+      const updatedEvents = [...events, ...holidays];
+      setEvents(updatedEvents);
+      localStorage.setItem("calendarEvents", JSON.stringify(updatedEvents));
     }
-    // ✅ include 'events' dependency
   }, [currentDate, events]);
-
 
   const handleSelectSlot = (slotInfo) => {
     setSelectedSlot(slotInfo);
@@ -139,15 +108,14 @@ const CustomCalendar = () => {
 
   const handleAddEvent = () => {
     if (!eventName || !selectedSlot) return;
-
     const newEvent = {
       id: Date.now(),
       title: eventName,
       start: new Date(selectedSlot.start),
       end: new Date(selectedSlot.end),
       color: getRandomColor(),
+      isHoliday: false,
     };
-
     const updatedEvents = [...events, newEvent];
     setEvents(updatedEvents);
     localStorage.setItem("calendarEvents", JSON.stringify(updatedEvents));
@@ -155,6 +123,7 @@ const CustomCalendar = () => {
   };
 
   const handleSelectEvent = (event) => {
+    if (event.isHoliday) return; // holidays cannot be deleted
     setSelectedEvent(event);
     setOpenView(true);
   };
@@ -182,10 +151,8 @@ const CustomCalendar = () => {
   };
 
   return (
-    <div style={{ height: "75vh", padding: "180px", paddingTop: '40px' }}>
-
+    <div style={{ height: "75vh", padding: "180px", paddingTop: "40px" }}>
       <SectionTitle title=" 🏢 Team Calendar" />
-
       <Calendar
         localizer={localizer}
         events={events}
@@ -214,8 +181,10 @@ const CustomCalendar = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="primary">Cancel</Button>
-          <Button onClick={handleAddEvent} color="primary" variant="contained">Add</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={handleAddEvent} variant="contained">
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -230,8 +199,10 @@ const CustomCalendar = () => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenView(false)} color="primary">Close</Button>
-          <Button onClick={handleDeleteEvent} color="error" variant="contained">Delete</Button>
+          <Button onClick={() => setOpenView(false)}>Close</Button>
+          <Button onClick={handleDeleteEvent} color="error" variant="contained">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
