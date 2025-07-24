@@ -42,12 +42,12 @@ const LeaveManagement = () => {
           <SectionTitle title='Leaves List' />
           <Button
             variant="contained"
-            onClick={() => navigate("/apply-leave")}
+            onClick={() => navigate("/leaves/apply-leave")}
             sx={{
               textTransform: "none",
               bgcolor: "#2a7b8bff",
               "&:hover": {
-                bgcolor: "#d2cf0aff",
+                bgcolor: "#22b7b7ff",
               },
               px: 3,
               py: 1,

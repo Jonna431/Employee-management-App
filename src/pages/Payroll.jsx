@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Card,
   CardContent,
-  Typography,
   Table,
   TableBody,
   TableCell,
@@ -17,27 +16,28 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Link,
+  Link
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import html2pdf from "html2pdf.js";
 import PaySlipCard from "./PaySlipCard";
+import SectionTitle from "./SectionTitle";
 
 const STORAGE_KEY = "vinayPayroll";
 
 const vinayPayrollData = [
-  { id: 1, name: "Vinay", month: "January", year: 2024, salary: "₹15,000" },
-  { id: 2, name: "Vinay", month: "February", year: 2024, salary: "₹17,000" },
-  { id: 3, name: "Vinay", month: "March", year: 2024, salary: "₹16,000" },
-  { id: 4, name: "Vinay", month: "April", year: 2024, salary: "₹18,500" },
-  { id: 5, name: "Vinay", month: "May", year: 2024, salary: "₹19,000" },
-  { id: 6, name: "Vinay", month: "June", year: 2024, salary: "₹20,000" },
-  { id: 7, name: "Vinay", month: "July", year: 2024, salary: "₹21,000" },
-  { id: 8, name: "Vinay", month: "August", year: 2024, salary: "₹22,500" },
-  { id: 9, name: "Vinay", month: "September", year: 2024, salary: "₹24,000" },
-  { id: 10, name: "Vinay", month: "October", year: 2024, salary: "₹25,000" },
-  { id: 11, name: "Vinay", month: "November", year: 2024, salary: "₹26,000" },
-  { id: 12, name: "Vinay", month: "December", year: 2024, salary: "₹27,500" },
+  { id: 1, name: "Vinay", month: "January", year: 2024, salary: "₹45,000" },
+  { id: 2, name: "Vinay", month: "February", year: 2024, salary: "₹47,000" },
+  { id: 3, name: "Vinay", month: "March", year: 2024, salary: "₹46,000" },
+  { id: 4, name: "Vinay", month: "April", year: 2024, salary: "₹48,500" },
+  { id: 5, name: "Vinay", month: "May", year: 2024, salary: "₹49,000" },
+  { id: 6, name: "Vinay", month: "June", year: 2024, salary: "₹50,000" },
+  { id: 7, name: "Vinay", month: "July", year: 2024, salary: "₹51,000" },
+  { id: 8, name: "Vinay", month: "August", year: 2024, salary: "₹52,500" },
+  { id: 9, name: "Vinay", month: "September", year: 2024, salary: "₹54,000" },
+  { id: 10, name: "Vinay", month: "October", year: 2024, salary: "₹55,000" },
+  { id: 11, name: "Vinay", month: "November", year: 2024, salary: "₹56,000" },
+  { id: 12, name: "Vinay", month: "December", year: 2024, salary: "₹57,500" },
 ];
 
 const Payroll = () => {
@@ -95,22 +95,14 @@ const Payroll = () => {
 
   return (
     <>
-      <Card sx={{ m: 4, p: 2, boxShadow: 5, borderRadius: 3 }}>
+      <Card sx={{ m: 5, p: 3, boxShadow: 5, borderRadius: 3,pb:5 }}>
         <CardContent>
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            textAlign="center"
-            color="primary"
-            gutterBottom
-          >
-            Payroll: Vinay
-          </Typography>
-
+          <SectionTitle title='Payroll : Vinay'/>
+{/* // stash */}
           <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
             <Table>
               <TableHead>
-                <TableRow sx={{ backgroundColor: "#e8f5e9" }}>
+                <TableRow sx={{ backgroundColor: "#c9708fff" }}>
                   <TableCell sx={{ fontWeight: "bold" }}>S.No.</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Month</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Year</TableCell>
@@ -123,7 +115,7 @@ const Payroll = () => {
                   <TableRow
                     key={row.id}
                     sx={{
-                      backgroundColor: index % 2 === 0 ? "#f0fff0" : "#fffef0",
+                      backgroundColor: index % 2 === 0 ? "#8ec5c2ff" : "#c0bfaaff",
                     }}
                   >
                     <TableCell>{page * rowsPerPage + index + 1}</TableCell>
@@ -163,6 +155,7 @@ const Payroll = () => {
                           key={i}
                           variant={i === page ? "contained" : "outlined"}
                           onClick={() => handleChangePage(i)}
+                          sx={{backgroundColor:'#1ebfa7dd',color:'black'}}
                         >
                           {i + 1}
                         </Button>

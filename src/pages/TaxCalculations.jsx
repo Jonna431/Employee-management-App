@@ -23,6 +23,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Logo from "../assets/logo1.png";
+import SectionTitle from "./SectionTitle";
 
 const PRIMARY_COLOR = "#0a9956ff";
 
@@ -170,14 +171,10 @@ const TaxCalculations = () => {
         <img src={Logo} alt="Company Logo" style={{ maxHeight: 60 }} />
       </Box> */}
 
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ color: PRIMARY_COLOR, textAlign: "center", fontWeight: "600" }}
-      >
-        Income Tax Calculator
-        {/* FY 2025-26 */}
-      </Typography>
+
+
+      <SectionTitle title=' Income Tax Calculator'  />
+
 
       {/* Form */}
       <Paper sx={{ p: 3, m: 3 }} elevation={3}>
@@ -234,12 +231,17 @@ const TaxCalculations = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                sx={{
+                  backgroundColor: '#2a7b8bff', "&:hover": {
+                    bgcolor: "#22b7b7ff",
+                  },
+                }}
               >
                 Calculate Tax
               </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button variant="outlined" fullWidth onClick={() => reset()}>
+              <Button variant="outlined"  fullWidth onClick={() => reset()}>
                 Reset
               </Button>
             </Grid>
@@ -386,9 +388,9 @@ const TaxCalculations = () => {
             disabled={pdfLoading}
             startIcon={<PictureAsPdfIcon />}
             sx={{
-              backgroundColor: PRIMARY_COLOR,
+              backgroundColor: '#2a7b8bff',
               color: "#fff",
-              "&:hover": { backgroundColor: "#155fa0" },
+              "&:hover": { backgroundColor: "#22b7b7ff" },
               "@media print": {
                 display: "none !important",
               },

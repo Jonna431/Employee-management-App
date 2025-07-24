@@ -104,6 +104,8 @@ const Navbar = () => {
                 </Typography>
                 <Typography
                   onClick={handleLogout}
+                  component={Link}
+                  to='/login'
                   sx={{
                     color: "#fff",
                     p: 1,
