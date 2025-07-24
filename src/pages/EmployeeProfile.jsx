@@ -11,7 +11,7 @@ const EmployeeProfile = () => {
   return (
     <Card sx={{ maxWidth: 500, margin: "2rem auto", p: 3 }}>
       <CardContent>
-        <Typography variant="h4" align="center" gutterBottom sx={{color:'#2a7b8bff'}}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ color: '#2a7b8bff' }}>
           {user.fullName}
         </Typography>
         <Typography
@@ -44,7 +44,11 @@ const EmployeeProfile = () => {
         </div>
         <Button
           variant="contained"
-          sx={{ mt: 3, display: "block", mx: "auto",backgroundColor:'#2a7b8bff' }}
+          sx={{
+            mt: 3, display: "block", mx: "auto", backgroundColor: '#2a7b8bff', "&:hover": {
+              bgcolor: "#22b7b7ff",
+            },
+          }}
           onClick={() => navigate("/edit-profile")}
         >
           Edit Profile

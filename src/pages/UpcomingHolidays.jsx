@@ -20,11 +20,11 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
   });
 
   return (
-    <Box sx={{marginTop:'100px',marginLeft:'10px'}}>
+    <Box sx={{marginTop:'5px',marginLeft:'10px'}}>
     <Card
       sx={{
-        width: 300,
-        minHeight: "450px",
+        width: 350,
+        minHeight: "520px",
         m: 2,
         borderRadius: 3,
         boxShadow: 6,

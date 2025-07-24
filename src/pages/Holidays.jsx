@@ -1,8 +1,9 @@
-// CustomCalendar.jsx
 import React, { useState, useEffect } from "react";
 import "./CustomCalendar.css";
 import SectionTitle from "./SectionTitle";
 import UpcomingHolidays from "./UpcomingHolidays";
+import ClockInOutCard from './ClockInOutCard';
+import WorkingHoursChart from './WorkingHoursChart';
 import {
   Calendar,
   momentLocalizer,
@@ -177,19 +178,19 @@ const CustomCalendar = () => {
       sx={{
         mx: "auto",
         mt: 3,
-        width: "85%",
+        width: "95%",
         p: 2,
-        pb:14,
-        pr:6,
+        pb: 10,
+        pr: 6,
         borderRadius: 3,
         boxShadow: 6,
         backgroundColor: "#ffffffdd",
       }}
     >
       <CardContent>
-        <Box sx={{ display: "flex", flexDirection: "row", height: "60vh", width: "100%", px: 2 }}>
-          <UpcomingHolidays events={events} currentMonth={currentDate.getMonth()} />
-          <Box sx={{ flex: 1, pl: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 2, width: "100%" }}>
+          {/* Left - Calendar */}
+          <Box sx={{ flex: 2.5 }}>
             <SectionTitle title=" 🏢 Team Calendar" />
             <Calendar
               localizer={localizer}
@@ -201,14 +202,23 @@ const CustomCalendar = () => {
               onSelectSlot={handleSelectSlot}
               onSelectEvent={handleSelectEvent}
               onNavigate={(date) => setCurrentDate(date)}
-              style={{ height: "100%" }}
+              style={{ height: 650 }}
               eventPropGetter={eventStyleGetter}
             />
+          </Box>
+
+          {/* Right - Clock and Stats */}
+          <Box sx={{ flex: 1.5, display: "flex", flexDirection: "column", gap: 2 }}>
+            <ClockInOutCard />
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <UpcomingHolidays events={events} currentMonth={currentDate.getMonth()} />
+              <WorkingHoursChart />
+            </Box>
           </Box>
         </Box>
       </CardContent>
 
-      {/* Dialogs (Add & View Event) */}
+      {/* Dialogs */}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Add Event</DialogTitle>
         <DialogContent>
