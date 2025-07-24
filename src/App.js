@@ -14,26 +14,35 @@ import CalendarComponent from "./pages/Holidays";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
+import EmployeeAssets from "./pages/employee/EmployeeAssets"; // Updated path
+import HRDashboard from "./pages/hr/Dashboard"; // You'll need to create this
+import HRAssetManagement from "./pages/hr/AssetManagement";
+import HREmployeeManagement from "./pages/hr/EmployeeManagement";
+import HRDashboardHome from "./pages/hr/DashboardHome";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 import image from "./assets/image5.png";
 
 const App = () => {
   return (
-    <div style={{
-      minHeight: "100vh",
-      backgroundImage: `url(${image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundAttachment: "fixed",
-      overflow: "hidden",
-      backgroundRepeat:'no-repeat'
-    }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        overflow: "hidden",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <AuthProvider>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Protected Routes under Layout with Navbar */}
+          {/* Employee Protected Routes under Layout with Navbar */}
           <Route
             element={
               <ProtectedRoute>
@@ -49,7 +58,26 @@ const App = () => {
             <Route path="/leaves" element={<LeaveManagement />} />
             <Route path="/leaves/apply-leave" element={<ApplyLeaveForm />} />
             <Route path="/payroll" element={<Payroll />} />
+            <Route path="/my-assets" element={<EmployeeAssets />} />
           </Route>
+
+          {/* HR Dashboard Routes - Separate Layout */}
+          <Route
+            path="/hr"
+            element={
+              <ProtectedRoute role="hr">
+                <HRDashboard /> {/* HR layout with its own navbar */}
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<HRDashboardHome />} />
+            <Route path="dashboard" element={<HRDashboardHome />} />
+            <Route path="employees" element={<HREmployeeManagement />} />
+            <Route path="assets" element={<HRAssetManagement />} />
+          </Route>
+
+          {/* Common Pages */}
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
         </Routes>
       </AuthProvider>
     </div>
