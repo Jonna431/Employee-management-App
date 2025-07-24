@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/holidays" element={<CalendarComponent />} />
             <Route path="/tax" element={<TaxCalculations />} />
             <Route path="/leaves" element={<LeaveManagement />} />
-            <Route path="/apply-leave" element={<ApplyLeaveForm />} />
+            <Route path="/leaves/apply-leave" element={<ApplyLeaveForm />} />
             <Route path="/payroll" element={<Payroll />} />
           </Route>
         </Routes>

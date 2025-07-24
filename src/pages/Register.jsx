@@ -86,7 +86,9 @@ const Register = () => {
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 3, py: 1, backgroundColor: "#2a7b8bff" }}
+            sx={{ mt: 3, py: 1, backgroundColor: "#2a7b8bff", "&:hover": {
+                bgcolor: "#22b7b7ff",
+              }, }}
           >
             Register
           </Button>

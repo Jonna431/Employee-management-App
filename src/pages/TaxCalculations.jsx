@@ -171,7 +171,7 @@ const TaxCalculations = () => {
         <img src={Logo} alt="Company Logo" style={{ maxHeight: 60 }} />
       </Box>
 
-     <SectionTitle title=' Income Tax Calculator FY 2024-25'/>
+      <SectionTitle title=' Income Tax Calculator FY 2024-25' />
 
       {/* Form */}
       <Paper sx={{ p: 3, m: 3 }} elevation={3}>
@@ -228,13 +228,17 @@ const TaxCalculations = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                sx={{backgroundColor:'#2a7b8bff'}}
+                sx={{
+                  backgroundColor: '#2a7b8bff', "&:hover": {
+                    bgcolor: "#22b7b7ff",
+                  },
+                }}
               >
                 Calculate Tax
               </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button variant="outlined" fullWidth onClick={() => reset()}>
+              <Button variant="outlined"  fullWidth onClick={() => reset()}>
                 Reset
               </Button>
             </Grid>
@@ -381,9 +385,9 @@ const TaxCalculations = () => {
             disabled={pdfLoading}
             startIcon={<PictureAsPdfIcon />}
             sx={{
-              backgroundColor: PRIMARY_COLOR,
+              backgroundColor: '#2a7b8bff',
               color: "#fff",
-              "&:hover": { backgroundColor: "#155fa0" },
+              "&:hover": { backgroundColor: "#22b7b7ff" },
               "@media print": {
                 display: "none !important",
               },

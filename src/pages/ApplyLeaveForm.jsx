@@ -142,6 +142,9 @@ const ApplyLeaveForm = () => {
                         fontWeight: 600,
                         borderRadius: 2,
                         backgroundColor: "#2a7b8bff",
+                        "&:hover": {
+                          bgcolor: "#22b7b7ff",
+                        },
                       }}
                     >
                       Submit

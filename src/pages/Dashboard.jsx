@@ -57,7 +57,7 @@ const Dashboard = () => {
               color: item.textColor,
               transition: "transform 0.3s ease",
               "&:hover": {
-                transform: "scale(1.03)",
+                transform: "scale(1.04)",
                 boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
               },
             }}
