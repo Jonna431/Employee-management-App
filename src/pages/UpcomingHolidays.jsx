@@ -26,6 +26,7 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
         width: 350,
         minHeight: "520px",
         m: 2,
+        marginLeft:'10px',
         borderRadius: 3,
         boxShadow: 6,
         bgcolor: "#f0f3f3d5",
