@@ -13,14 +13,15 @@ import ApplyLeaveForm from "./pages/ApplyLeaveForm";
 import CalendarComponent from "./pages/Holidays";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Layout from "./components/Layout";
-import EmployeeAssets from "./pages/employee/EmployeeAssets"; // Updated path
-import HRDashboard from "./pages/hr/Dashboard"; // You'll need to create this
-import HRAssetManagement from "./pages/hr/AssetManagement";
-import HREmployeeManagement from "./pages/hr/EmployeeManagement";
-import HRDashboardHome from "./pages/hr/DashboardHome";
-import UnauthorizedPage from "./pages/UnauthorizedPage";
+
 import image from "./assets/image5.png";
+import HRDashboard from "./pages/hr/Dashboard";
+import HRDashboardHome from "./pages/hr/DashboardHome";
+import HREmployeeManagement from "./pages/hr/EmployeeManagement";
+import HRAssetManagement from "./pages/hr/AssetManagement";
+import EmployeeAssets from "./pages/employee/EmployeeAssets";
+import Layout from "./components/Layout";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 
 const App = () => {
   return (
