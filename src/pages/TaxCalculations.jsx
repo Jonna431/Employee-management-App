@@ -25,7 +25,7 @@ import jsPDF from "jspdf";
 import Logo from "../assets/logo1.png";
 import SectionTitle from "./SectionTitle";
 
-const PRIMARY_COLOR = "#1976D2";
+const PRIMARY_COLOR = "#0a9956ff";
 
 const schema = yup.object().shape({
   grossSalary: yup.number().typeError("Required").min(0).required(),
@@ -167,11 +167,14 @@ const TaxCalculations = () => {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+      {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
         <img src={Logo} alt="Company Logo" style={{ maxHeight: 60 }} />
-      </Box>
+      </Box> */}
 
-      <SectionTitle title=' Income Tax Calculator FY 2024-25' />
+
+
+      <SectionTitle title=' Income Tax Calculator'  />
+
 
       {/* Form */}
       <Paper sx={{ p: 3, m: 3 }} elevation={3}>
