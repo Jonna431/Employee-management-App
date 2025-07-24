@@ -1,4 +1,3 @@
-// src/components/hr/AssetManagement.jsx
 import { useState } from "react";
 import {
   Box,

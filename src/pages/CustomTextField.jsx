@@ -15,7 +15,7 @@ const CustomTextField = ({
       fullWidth
       label={label}
       type={type}
-      margin="normal" // ✅ Adds vertical spacing
+      margin="normal" // Adds vertical spacing
       sx={{ backgroundColor: "#fff" }} // Optional: field background
       {...register(name)}
       error={!!error}
