@@ -38,7 +38,7 @@ export default function ClockInOutCard() {
   const progress = (workedSeconds / shiftDuration) * 100;
 
   return (
-    <Card sx={{ width: 450,marginLeft:'50px'}}>
+    <Card sx={{ width: 450,marginLeft:'150px'}}>
       <CardContent>
         <Typography variant="h6" fontWeight="bold">Let's get to work</Typography>
         <Box display="flex" justifyContent="space-between" mt={1}>
