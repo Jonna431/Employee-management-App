@@ -1,12 +1,6 @@
 // src/pages/Register.js
 import React from "react";
-import {
-  Button,
-  Container,
-  Typography,
-  Paper,
-  Box,
-} from "@mui/material";
+import { Button, Container, Typography, Paper, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -53,7 +47,7 @@ const Register = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
-        <SectionTitle title='Employee Registration' />
+        <SectionTitle title="Employee Registration" />
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <CustomTextField
@@ -86,9 +80,14 @@ const Register = () => {
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 3, py: 1, backgroundColor: "#2a7b8bff", "&:hover": {
+            sx={{
+              mt: 3,
+              py: 1,
+              backgroundColor: "#2a7b8bff",
+              "&:hover": {
                 bgcolor: "#22b7b7ff",
-              }, }}
+              },
+            }}
           >
             Register
           </Button>

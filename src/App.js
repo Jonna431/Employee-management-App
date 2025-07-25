@@ -22,7 +22,9 @@ import HRAssetManagement from "./pages/hr/AssetManagement";
 import EmployeeAssets from "./pages/employee/EmployeeAssets";
 import Layout from "./components/Layout";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
+import ProfilePage from "./pages/ProfilePage";
 
+import "./App.css";
 const App = () => {
   return (
     <div
@@ -41,7 +43,6 @@ const App = () => {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
 
           {/* Employee Protected Routes under Layout with Navbar */}
           <Route
@@ -52,7 +53,9 @@ const App = () => {
             }
           >
             <Route path="/home" element={<Dashboard />} />
-            <Route path="/profile" element={<EmployeeProfile />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/employee-profile" element={<EmployeeProfile />} />
+
             <Route path="/edit-profile" element={<EditProfileForm />} />
             <Route path="/holidays" element={<CalendarComponent />} />
             <Route path="/tax" element={<TaxCalculations />} />
