@@ -17,7 +17,6 @@ import {
   Lock as PasswordIcon,
   Notifications as NotificationIcon,
   Help as HelpIcon,
-  ContactSupport as SupportIcon,
 } from "@mui/icons-material";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 
@@ -32,7 +31,7 @@ const EmpSettings = ({ toggleSidebar, isSidebarOpen }) => {
   const menuItems = [
     {
       id: "profile",
-      path: "/settings",
+      path: "/settings/profile",
       exact: true,
       label: "Profile",
       icon: <ProfileIcon fontSize="small" />,
@@ -58,14 +57,8 @@ const EmpSettings = ({ toggleSidebar, isSidebarOpen }) => {
     {
       id: "help",
       path: "/settings/help",
-      label: "Help",
+      label: "Help & Support",
       icon: <HelpIcon fontSize="small" />,
-    },
-    {
-      id: "support",
-      path: "/settings/support",
-      label: "Support",
-      icon: <SupportIcon fontSize="small" />,
     },
   ];
 

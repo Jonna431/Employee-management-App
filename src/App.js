@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Home";
@@ -25,7 +25,7 @@ import EmpSettings from "./pages/EmpSetttings";
 import ChangePasswordForm from "./pages/employee/ChangePasswordForm";
 import Notifications from "./pages/employee/Notifications";
 import Help from "./pages/employee/Help";
-import Support from "./pages/employee/Support";
+
 import "./App.css";
 import EditProfileForm from "./pages/EditProfileForm";
 
@@ -58,19 +58,16 @@ const App = () => {
           >
             <Route path="/reports" element={<Dashboard />} />
 
-            {/* Nested Settings Routes - Sidebar will persist */}
             <Route path="/settings" element={<EmpSettings />}>
-              <Route index element={<EmployeeProfile />} />{" "}
-              {/* This matches /settings */}
-              <Route path="employee-profile" element={<EmployeeProfile />} />
+              <Route index element={<Navigate to="profile" replace />} />
+              <Route path="profile" element={<EmployeeProfile />} />
               <Route
-                path="employee-profile/edit-profile"
+                path="profile/edit-profile"
                 element={<EditProfileForm />}
               />
               <Route path="change-password" element={<ChangePasswordForm />} />
               <Route path="notifications" element={<Notifications />} />
               <Route path="help" element={<Help />} />
-              <Route path="support" element={<Support />} />
             </Route>
 
             <Route path="/dashboard" element={<CalendarComponent />} />

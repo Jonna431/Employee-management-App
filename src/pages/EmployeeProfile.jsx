@@ -58,7 +58,7 @@ const EmployeeProfile = () => {
               bgcolor: "#22b7b7ff",
             },
           }}
-          onClick={() => navigate("/settings/employee-profile/edit-profile")}
+          onClick={() => navigate("/settings/profile/edit-profile")}
         >
           Edit Profile
         </Button>
