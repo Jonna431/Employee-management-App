@@ -192,7 +192,7 @@ const CustomCalendar = () => {
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2, width: "100%" }}>
           {/* Left - Calendar */}
           <Box sx={{ flex: 2.5 }}>
-            <SectionTitle title=" 🏢 Team Calendar" />
+            <SectionTitle title=" 🏢 Team Calendar"  />
             <Calendar
               localizer={localizer}
               events={events}

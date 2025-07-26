@@ -89,10 +89,10 @@ const Navbar = ({ onMenuClick }) => {
               <Box
                 sx={{
                   position: "absolute",
-                  top: 40,
-                  right: 0,
-                  backgroundColor: "#333",
-                  p: 1,
+                  top: 60,
+                  right: -15,
+                  backgroundColor: "#b0b8beff",
+                  p: 4,
                   borderRadius: 1,
                   zIndex: 999,
                   display: "flex",
@@ -104,13 +104,13 @@ const Navbar = ({ onMenuClick }) => {
                   to="/profile"
                   onClick={() => setMenuOpen(false)}
                   sx={{
-                    color: "#fff",
+                    color: "#333",
                     textDecoration: "none",
                     p: 1,
-                    "&:hover": { color: "#90caf9" },
+                    "&:hover": { color: "#ea1906ff" },
                   }}
                 >
-                  Profile
+                  Settings
                 </Typography>
                 <Typography
                   onClick={() => {
@@ -118,7 +118,7 @@ const Navbar = ({ onMenuClick }) => {
                     handleLogout();
                   }}
                   sx={{
-                    color: "#fff",
+                    color: "#333",
                     p: 1,
                     cursor: "pointer",
                     "&:hover": { color: "#f50909ff" },

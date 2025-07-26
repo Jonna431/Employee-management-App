@@ -10,6 +10,7 @@ import {
   Button,
   Box,
   Paper,
+  TextField,
 } from "@mui/material";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 const LeaveManagement = () => {
   const { user } = useContext(AuthContext);
   const [leaves, setLeaves] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // 🔍 Search state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,8 +30,15 @@ const LeaveManagement = () => {
     setLeaves(userLeaves);
   }, [user.email]);
 
+  //  Filter leaves based on search input
+  const filteredLeaves = leaves.filter((leave) =>
+    Object.values(leave).some((value) =>
+      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   return (
-    <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
+    <Container sx={{ mt: 5, mb: 5 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Box
           sx={{
@@ -39,7 +48,7 @@ const LeaveManagement = () => {
             mb: 3,
           }}
         >
-          <SectionTitle title='Leaves List' />
+          <SectionTitle title="Leaves List" />
           <Button
             variant="contained"
             onClick={() => navigate("/leaves/apply-leave")}
@@ -58,6 +67,29 @@ const LeaveManagement = () => {
           </Button>
         </Box>
 
+        {/* 🔍 Search Bar */}
+        <TextField
+          fullWidth
+          label="Search leaves by name, type, or date"
+          variant="outlined"
+          size="small"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{
+            mb: 3, '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#2a7b8bff',
+              },
+              '&:hover fieldset': {
+                borderColor: '#22b7b7ff',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#22b7b7ff',
+              },
+            },
+          }}
+        />
+
         <Table>
           <TableHead sx={{ backgroundColor: "#f5f5f5" }}>
             <TableRow>
@@ -69,8 +101,8 @@ const LeaveManagement = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaves.length > 0 ? (
-              leaves.map((leave, index) => (
+            {filteredLeaves.length > 0 ? (
+              filteredLeaves.map((leave, index) => (
                 <TableRow
                   key={index}
                   sx={{

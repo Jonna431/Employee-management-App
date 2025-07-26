@@ -19,7 +19,6 @@ import {
   Notifications as NotificationIcon,
 } from "@mui/icons-material";
 import EmployeeProfile from "./EmployeeProfile";
-import EditProfileForm from "./EditProfileForm";
 import ChangePasswordForm from "./employee/ChangePasswordForm";
 import Notifications from "./employee/Notifications";
 
@@ -33,8 +32,6 @@ const ProfilePage = ({ toggleSidebar, isSidebarOpen }) => {
     switch (activeComponent) {
       case "profile":
         return <EmployeeProfile />;
-      case "edit":
-        return <EditProfileForm />;
       case "password":
         return <ChangePasswordForm />;
       case "notifications":
@@ -81,8 +78,8 @@ const ProfilePage = ({ toggleSidebar, isSidebarOpen }) => {
             "& .MuiTypography-root": { margin: 0 },
           }}
         >
-          <Box sx={{ p: 1 }}>
-            <Typography variant="h6">Your Profile</Typography>
+          <Box  sx={{ p: 3,  }}>
+            <Typography variant="h6" sx={{color:'#2a7b8bff'}}>Profile Settings</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <List sx={{ flexGrow: 1, padding: 0 }}>
@@ -115,10 +112,6 @@ const ProfilePage = ({ toggleSidebar, isSidebarOpen }) => {
               }}
               selected={activeComponent === "edit"}
             >
-              <ListItemIcon sx={{ minWidth: "36px" }}>
-                <EditIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Edit Profile" />
             </ListItem>
             <ListItem
               button
@@ -154,6 +147,7 @@ const ProfilePage = ({ toggleSidebar, isSidebarOpen }) => {
               </ListItemIcon>
               <ListItemText primary="Notifications" />
             </ListItem>
+            
           </List>
         </Box>
       </Drawer>
@@ -172,7 +166,7 @@ const ProfilePage = ({ toggleSidebar, isSidebarOpen }) => {
           elevation={5}
           sx={{
             height: "90%",
-            padding: "4px",
+            padding: "6px",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",

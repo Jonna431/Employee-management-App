@@ -19,12 +19,12 @@ const Layout = () => {
       <Box
         component="main"
         sx={{
-          marginTop: "0px", // Adjust to match your Navbar height
-          padding: "2px",
-          marginLeft: {
-            xs: 0,
-            md: "0px", // Match your sidebar width
-          },
+          mt: 3,
+          px: 2, 
+          maxWidth: "1800px", 
+          mx: "auto", 
+          width: "100%",
+          minHeight: "calc(100vh - 64px)", 
           transition: "margin-left 0.3s ease",
         }}
       >

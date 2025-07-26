@@ -52,7 +52,7 @@ const ApplyLeaveForm = () => {
 
     saveLeave(leave);
     reset();
-    navigate("/dashboard/leave");
+    navigate("/leaves");
   };
 
   return (
