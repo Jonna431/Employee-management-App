@@ -70,7 +70,7 @@ const LeaveManagement = () => {
         {/* 🔍 Search Bar */}
         <TextField
           fullWidth
-          label="Search leaves by name, type, or date"
+          label=" Search leaves by name, type, or date "
           variant="outlined"
           size="small"
           value={searchTerm}

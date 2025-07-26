@@ -91,7 +91,7 @@ const Navbar = ({ onMenuClick }) => {
                   position: "absolute",
                   top: 60,
                   right: -15,
-                  backgroundColor: "#b0b8beff",
+                  backgroundColor: "#ffff",
                   p: 4,
                   borderRadius: 1,
                   zIndex: 999,
@@ -107,7 +107,7 @@ const Navbar = ({ onMenuClick }) => {
                     color: "#333",
                     textDecoration: "none",
                     p: 1,
-                    "&:hover": { color: "#ea1906ff" },
+                    "&:hover": { color: "#09afaaff" },
                   }}
                 >
                   Settings
