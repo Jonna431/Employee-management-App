@@ -13,15 +13,18 @@ import ApplyLeaveForm from "./pages/ApplyLeaveForm";
 import CalendarComponent from "./pages/Dashboard";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Layout from "./components/Layout";
-import EmployeeAssets from "./pages/employee/EmployeeAssets"; // Updated path
-import HRDashboard from "./pages/hr/Dashboard"; // You'll need to create this
-import HRAssetManagement from "./pages/hr/AssetManagement";
-import HREmployeeManagement from "./pages/hr/EmployeeManagement";
-import HRDashboardHome from "./pages/hr/DashboardHome";
-import UnauthorizedPage from "./pages/UnauthorizedPage";
-import image from "./assets/image5.png";
 
+import image from "./assets/image5.png";
+import HRDashboard from "./pages/hr/Dashboard";
+import HRDashboardHome from "./pages/hr/DashboardHome";
+import HREmployeeManagement from "./pages/hr/EmployeeManagement";
+import HRAssetManagement from "./pages/hr/AssetManagement";
+import EmployeeAssets from "./pages/employee/EmployeeAssets";
+import Layout from "./components/Layout";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
+import ProfilePage from "./pages/ProfilePage";
+
+import "./App.css";
 const App = () => {
   return (
     <div
@@ -40,7 +43,6 @@ const App = () => {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
 
           {/* Employee Protected Routes under Layout with Navbar */}
           <Route
@@ -50,8 +52,13 @@ const App = () => {
               </ProtectedRoute>
             }
           >
+
             <Route path="/reports" element={<Dashboard />} />
-            <Route path="/profile" element={<EmployeeProfile />} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/employee-profile" element={<EmployeeProfile />} />
+
+
             <Route path="/edit-profile" element={<EditProfileForm />} />
             <Route path="/dashboard" element={<CalendarComponent />} />
             <Route path="/tax" element={<TaxCalculations />} />

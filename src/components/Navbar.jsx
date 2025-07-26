@@ -7,24 +7,34 @@ import {
   Box,
   IconButton,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
+
 import { NavLink } from "react-router-dom";
+
+import MenuIcon from "@mui/icons-material/Menu";
+
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Reports", path: "/reports" },
   { name: "Leave Management", path: "/leaves" },
   { name: "Tax Calculations", path: "/tax" },
-  { name: "Payroll", path: "/payroll" }
+  { name: "Payroll", path: "/payroll" },
 ];
 
-const Navbar = () => {
-  const { user, } = useContext(AuthContext);
+
+const Navbar = ({ onMenuClick }) => {
+  const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [avatarHover, setAvatarHover] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleLogout = () => {
     navigate("/");
@@ -33,21 +43,37 @@ const Navbar = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#2a7b8bff" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* Left: Logo */}
+        {/* Left: Logo + Mobile Menu Button */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {isMobile && onMenuClick && (
+            <IconButton color="inherit" onClick={onMenuClick} sx={{ mr: 1 }}>
+              <MenuIcon />
+            </IconButton>
+          )}
           <img src={logo1} alt="Logo" style={{ height: 60 }} />
         </Box>
 
-        {/* Middle: Nav Links */}
+        {/* Middle: Nav Links - Hidden on mobile */}
         {user && (
+
           <Box sx={{ display: "flex", gap: 18,fontWeight:600 }}>
+
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 8 }}>
+
             {navItems.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
                 style={({ isActive }) => ({
                   textDecoration: "none",
-                })}
+
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  "&:hover": {
+                    color: "#dab708ff",
+                  },
+                }}
+
               >
                 {({ isActive }) => (
                   <Typography
@@ -110,13 +136,11 @@ const Navbar = () => {
                 </Typography>
                 <Typography
                   onClick={handleLogout}
-                  component={Link}
-                  to='/login'
                   sx={{
                     color: "#fff",
                     p: 1,
                     cursor: "pointer",
-                    "&:hover": { color: "#f44336" },
+                    "&:hover": { color: "#f50909ff" },
                   }}
                 >
                   Logout
