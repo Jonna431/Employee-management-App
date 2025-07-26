@@ -44,7 +44,7 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
           <EventIcon color="primary" sx={{ mr: 1 }} />
           <Typography
             variant="h5"
-            sx={{ color: "#b4046bef", fontWeight: "bold" }}
+            sx={{ color: "#2a7b8bff", fontWeight: "bold" }}
           >
             Upcoming Events
           </Typography>
