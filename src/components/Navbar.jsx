@@ -10,14 +10,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import { AuthContext } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
-
-import { NavLink } from "react-router-dom";
-
-import MenuIcon from "@mui/icons-material/Menu";
-
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard" },
@@ -27,12 +23,10 @@ const navItems = [
   { name: "Payroll", path: "/payroll" },
 ];
 
-
 const Navbar = ({ onMenuClick }) => {
   const { user } = useContext(AuthContext);
-
   const navigate = useNavigate();
-  const [avatarHover, setAvatarHover] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Toggle for avatar menu
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -55,25 +49,12 @@ const Navbar = ({ onMenuClick }) => {
 
         {/* Middle: Nav Links - Hidden on mobile */}
         {user && (
-
-          <Box sx={{ display: "flex", gap: 18,fontWeight:600 }}>
-
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 8 }}>
-
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 18, fontWeight: 600 }}>
             {navItems.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
-                style={({ isActive }) => ({
-                  textDecoration: "none",
-
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  "&:hover": {
-                    color: "#dab708ff",
-                  },
-                }}
-
+                style={{ textDecoration: "none" }}
               >
                 {({ isActive }) => (
                   <Typography
@@ -95,20 +76,16 @@ const Navbar = ({ onMenuClick }) => {
           </Box>
         )}
 
-        {/* Right: Avatar + Hover Menu */}
+        {/* Right: Avatar + Dropdown Menu */}
         {user && (
-          <Box
-            onMouseEnter={() => setAvatarHover(true)}
-            onMouseLeave={() => setAvatarHover(false)}
-            sx={{ position: "relative" }}
-          >
-            <IconButton>
+          <Box sx={{ position: "relative" }}>
+            <IconButton onClick={() => setMenuOpen((prev) => !prev)}>
               <Avatar sx={{ bgcolor: "#fff", color: "#1976d2" }}>
                 {user.fullName?.charAt(0).toUpperCase()}
               </Avatar>
             </IconButton>
 
-            {avatarHover && (
+            {menuOpen && (
               <Box
                 sx={{
                   position: "absolute",
@@ -125,6 +102,7 @@ const Navbar = ({ onMenuClick }) => {
                 <Typography
                   component={Link}
                   to="/profile"
+                  onClick={() => setMenuOpen(false)}
                   sx={{
                     color: "#fff",
                     textDecoration: "none",
@@ -135,7 +113,10 @@ const Navbar = ({ onMenuClick }) => {
                   Profile
                 </Typography>
                 <Typography
-                  onClick={handleLogout}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    handleLogout();
+                  }}
                   sx={{
                     color: "#fff",
                     p: 1,

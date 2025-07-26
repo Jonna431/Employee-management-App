@@ -41,7 +41,7 @@ const AttendanceSummary = () => {
         padding: 2,
         width: "100%",
         maxWidth: 300,
-        height:320,
+        height:350,
         mt:1,
       }}
     >
