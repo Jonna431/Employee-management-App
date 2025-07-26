@@ -1,16 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Login";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Home";
 import TaxCalculations from "./pages/TaxCalculations";
 import LeaveManagement from "./pages/LeaveManagement";
 import Payroll from "./pages/Payroll";
 import EmployeeProfile from "./pages/EmployeeProfile";
 import EditProfileForm from "./pages/EditProfileForm";
 import ApplyLeaveForm from "./pages/ApplyLeaveForm";
-import CalendarComponent from "./pages/Holidays";
+import CalendarComponent from "./pages/Dashboard";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
@@ -50,10 +50,10 @@ const App = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="/home" element={<Dashboard />} />
+            <Route path="/reports" element={<Dashboard />} />
             <Route path="/profile" element={<EmployeeProfile />} />
             <Route path="/edit-profile" element={<EditProfileForm />} />
-            <Route path="/holidays" element={<CalendarComponent />} />
+            <Route path="/dashboard" element={<CalendarComponent />} />
             <Route path="/tax" element={<TaxCalculations />} />
             <Route path="/leaves" element={<LeaveManagement />} />
             <Route path="/leaves/apply-leave" element={<ApplyLeaveForm />} />

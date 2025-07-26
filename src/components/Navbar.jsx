@@ -11,22 +11,22 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
+import { NavLink } from "react-router-dom";
 
 const navItems = [
-  { name: "Home", path: "/home" },
-  { name: "Holidays", path: "/holidays" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Reports", path: "/reports" },
   { name: "Leave Management", path: "/leaves" },
   { name: "Tax Calculations", path: "/tax" },
   { name: "Payroll", path: "/payroll" }
 ];
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, } = useContext(AuthContext);
   const navigate = useNavigate();
   const [avatarHover, setAvatarHover] = useState(false);
 
   const handleLogout = () => {
-    logout();
     navigate("/");
   };
 
@@ -40,25 +40,31 @@ const Navbar = () => {
 
         {/* Middle: Nav Links */}
         {user && (
-          <Box sx={{ display: "flex", gap: 8 }}>
+          <Box sx={{ display: "flex", gap: 18,fontWeight:600 }}>
             {navItems.map((item) => (
-              <Typography
+              <NavLink
                 key={item.name}
-                component={Link}
                 to={item.path}
-                sx={{
-                  color: "#fff",
+                style={({ isActive }) => ({
                   textDecoration: "none",
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  "&:hover": {
-                    // textDecoration: "underline",
-                    color: "#dab708ff",
-                  },
-                }}
+                })}
               >
-                {item.name}
-              </Typography>
+                {({ isActive }) => (
+                  <Typography
+                    sx={{
+                      color: isActive ? "#dab708ff" : "#fff",
+                      fontSize: "1rem",
+                      fontWeight: isActive ? 700 : 500,
+                      transition: "0.3s",
+                      "&:hover": {
+                        color: "#dab708ff",
+                      },
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                )}
+              </NavLink>
             ))}
           </Box>
         )}

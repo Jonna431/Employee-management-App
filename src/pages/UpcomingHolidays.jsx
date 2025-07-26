@@ -6,10 +6,8 @@ import {
   ListItem,
   ListItemText,
   Box,
-  Card,
-  CardContent,
-  CardHeader,
   Divider,
+  Paper,
 } from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
 
@@ -20,25 +18,38 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
   });
 
   return (
-    <Box sx={{marginTop:'5px',marginLeft:'10px'}}>
-    <Card
-      sx={{
-        width: 350,
-        minHeight: "520px",
-        m: 2,
-        marginLeft:'10px',
-        borderRadius: 3,
-        boxShadow: 6,
-        bgcolor: "#f0f3f3d5",
-      }}
-    >
-      <CardHeader
-        avatar={<EventIcon color="primary" />}
-        title="Upcoming Events"
-        titleTypographyProps={{ variant: "h5" }}
-        sx={{ borderBottom: "2px solid #ddd", pb: 1 ,color:'#b4046bef',}}
-      />
-      <CardContent>
+    <Box sx={{ marginTop: "5px", marginLeft: "10px" }}>
+      <Paper
+        elevation={6}
+        sx={{
+          // width: 620,
+          minHeight: "250px",
+          m: 2,
+          mt:1,
+          p: 2,
+          marginLeft: "10px",
+          borderRadius:2,
+         
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            borderBottom: "2px solid #ddd",
+            pb: 1,
+            mb: 1,
+          }}
+        >
+          <EventIcon color="primary" sx={{ mr: 1 }} />
+          <Typography
+            variant="h5"
+            sx={{ color: "#b4046bef", fontWeight: "bold" }}
+          >
+            Upcoming Events
+          </Typography>
+        </Box>
+
         {holidaysThisMonth.length > 0 ? (
           <List dense>
             {holidaysThisMonth.map((holiday) => (
@@ -62,8 +73,7 @@ const UpcomingHolidays = ({ events, currentMonth }) => {
             No holidays this month.
           </Typography>
         )}
-      </CardContent>
-    </Card>
+      </Paper>
     </Box>
   );
 };

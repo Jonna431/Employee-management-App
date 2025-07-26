@@ -102,7 +102,7 @@ const Payroll = () => {
           <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
             <Table>
               <TableHead>
-                <TableRow sx={{ backgroundColor: "#c9708fff" }}>
+                <TableRow sx={{ backgroundColor: "#98c9c9ff" }}>
                   <TableCell sx={{ fontWeight: "bold" }}>S.No.</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Month</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Year</TableCell>
@@ -115,7 +115,7 @@ const Payroll = () => {
                   <TableRow
                     key={row.id}
                     sx={{
-                      backgroundColor: index % 2 === 0 ? "#8ec5c2ff" : "#c0bfaaff",
+                      backgroundColor: index % 2 === 0 ? "#eaf3f2ff" : "#f7f3f3ff",
                     }}
                   >
                     <TableCell>{page * rowsPerPage + index + 1}</TableCell>
