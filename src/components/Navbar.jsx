@@ -49,7 +49,13 @@ const Navbar = ({ onMenuClick }) => {
 
         {/* Middle: Nav Links - Hidden on mobile */}
         {user && (
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 18, fontWeight: 600 }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 18,
+              fontWeight: 600,
+            }}
+          >
             {navItems.map((item) => (
               <NavLink
                 key={item.name}
@@ -101,7 +107,7 @@ const Navbar = ({ onMenuClick }) => {
               >
                 <Typography
                   component={Link}
-                  to="/profile"
+                  to="/settings"
                   onClick={() => setMenuOpen(false)}
                   sx={{
                     color: "#333",

@@ -50,8 +50,8 @@ const EditProfileForm = () => {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Paper sx={{padding:'50px',width:'800px'}}>
-        <Typography variant="h5" gutterBottom sx={{ color: '#2a7b8bff', }}>
+      <Paper sx={{ padding: "50px", width: "800px" }}>
+        <Typography variant="h5" gutterBottom sx={{ color: "#2a7b8bff" }}>
           Edit Your Profile
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -141,16 +141,22 @@ const EditProfileForm = () => {
             error={!!errors.department}
             helperText={errors.department?.message}
           />
-          <Button variant="contained" fullWidth type="submit" sx={{
-            mt: 2, backgroundColor: '#2a7b8bff', "&:hover": {
-              bgcolor: "#22b7b7ff",
-            },
-          }}>
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={{
+              mt: 2,
+              backgroundColor: "#2a7b8bff",
+              "&:hover": {
+                bgcolor: "#22b7b7ff",
+              },
+            }}
+          >
             Update
           </Button>
         </form>
       </Paper>
-
     </Container>
   );
 };
