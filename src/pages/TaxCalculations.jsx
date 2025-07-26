@@ -166,7 +166,7 @@ const TaxCalculations = () => {
   const beneficialRegime = difference > 0 ? "NEW REGIME" : "OLD REGIME";
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container  sx={{ py: 4 }}>
       {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
         <img src={Logo} alt="Company Logo" style={{ maxHeight: 60 }} />
       </Box> */}

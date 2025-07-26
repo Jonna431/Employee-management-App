@@ -5,6 +5,7 @@ import {
   Container,
   MenuItem,
   Typography,
+  Paper,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -44,109 +45,112 @@ const EditProfileForm = () => {
     );
     localStorage.setItem("employee-users", JSON.stringify(updatedUsers));
     login({ ...user, ...data }); // update context
-    navigate("/home");
+    navigate("/profile");
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom sx={{ color: '#2a7b8bff', }}>
-        Edit Your Profile
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Full Name"
-          {...register("fullName")}
-          error={!!errors.fullName}
-          helperText={errors.fullName?.message}
-        />
-        <TextField
-          select
-          fullWidth
-          margin="normal"
-          label="Gender"
-          {...register("gender")}
-          error={!!errors.gender}
-          helperText={errors.gender?.message}
-        >
-          <MenuItem value="Male">Male</MenuItem>
-          <MenuItem value="Female">Female</MenuItem>
-          <MenuItem value="Other">Other</MenuItem>
-        </TextField>
-        <TextField
-          select
-          fullWidth
-          margin="normal"
-          label="Marital Status"
-          {...register("maritalStatus")}
-          error={!!errors.maritalStatus}
-          helperText={errors.maritalStatus?.message}
-        >
-          <MenuItem value="Single">Single</MenuItem>
-          <MenuItem value="Married">Married</MenuItem>
-        </TextField>
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Age"
-          type="number"
-          {...register("age")}
-          error={!!errors.age}
-          helperText={errors.age?.message}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Date of Birth"
-          type="date"
-          InputLabelProps={{ shrink: true }}
-          {...register("dob")}
-          error={!!errors.dob}
-          helperText={errors.dob?.message}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Phone Number"
-          {...register("phone")}
-          error={!!errors.phone}
-          helperText={errors.phone?.message}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Address"
-          multiline
-          rows={3}
-          {...register("address")}
-          error={!!errors.address}
-          helperText={errors.address?.message}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Designation"
-          {...register("designation")}
-          error={!!errors.designation}
-          helperText={errors.designation?.message}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Department"
-          {...register("department")}
-          error={!!errors.department}
-          helperText={errors.department?.message}
-        />
-        <Button variant="contained" fullWidth type="submit" sx={{
-          mt: 2, backgroundColor: '#2a7b8bff', "&:hover": {
-            bgcolor: "#22b7b7ff",
-          },
-        }}>
-          Update
-        </Button>
-      </form>
+      <Paper sx={{padding:'50px',width:'800px'}}>
+        <Typography variant="h5" gutterBottom sx={{ color: '#2a7b8bff', }}>
+          Edit Your Profile
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Full Name"
+            {...register("fullName")}
+            error={!!errors.fullName}
+            helperText={errors.fullName?.message}
+          />
+          <TextField
+            select
+            fullWidth
+            margin="normal"
+            label="Gender"
+            {...register("gender")}
+            error={!!errors.gender}
+            helperText={errors.gender?.message}
+          >
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </TextField>
+          <TextField
+            select
+            fullWidth
+            margin="normal"
+            label="Marital Status"
+            {...register("maritalStatus")}
+            error={!!errors.maritalStatus}
+            helperText={errors.maritalStatus?.message}
+          >
+            <MenuItem value="Single">Single</MenuItem>
+            <MenuItem value="Married">Married</MenuItem>
+          </TextField>
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Age"
+            type="number"
+            {...register("age")}
+            error={!!errors.age}
+            helperText={errors.age?.message}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Date of Birth"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            {...register("dob")}
+            error={!!errors.dob}
+            helperText={errors.dob?.message}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Phone Number"
+            {...register("phone")}
+            error={!!errors.phone}
+            helperText={errors.phone?.message}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Address"
+            multiline
+            rows={3}
+            {...register("address")}
+            error={!!errors.address}
+            helperText={errors.address?.message}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Designation"
+            {...register("designation")}
+            error={!!errors.designation}
+            helperText={errors.designation?.message}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Department"
+            {...register("department")}
+            error={!!errors.department}
+            helperText={errors.department?.message}
+          />
+          <Button variant="contained" fullWidth type="submit" sx={{
+            mt: 2, backgroundColor: '#2a7b8bff', "&:hover": {
+              bgcolor: "#22b7b7ff",
+            },
+          }}>
+            Update
+          </Button>
+        </form>
+      </Paper>
+
     </Container>
   );
 };

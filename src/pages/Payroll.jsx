@@ -97,7 +97,7 @@ const Payroll = () => {
     <>
       <Card sx={{ m: 5, p: 3, boxShadow: 5, borderRadius: 3,pb:5 }}>
         <CardContent>
-          <SectionTitle title='Payroll : Vinay'/>
+          <SectionTitle title='Payroll List'/>
 {/* // stash */}
           <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
             <Table>
