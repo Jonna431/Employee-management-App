@@ -1,68 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Card, CardContent, Typography, Button, LinearProgress, Box,
-} from '@mui/material';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, Typography, Button, Box, Divider } from "@mui/material";
+import moment from "moment";
 
-
-const shiftStart = new Date();
-shiftStart.setHours(9, 30, 0, 0);
-
-const shiftEnd = new Date();
-shiftEnd.setHours(18, 30, 0, 0);
-
-export default function ClockInOutCard() {
-  const [startTime, setStartTime] = useState(null);
-  const [workedSeconds, setWorkedSeconds] = useState(0);
+const ClockInOutCard = () => {
+  const [isClockedIn, setIsClockedIn] = useState(false);
+  const [clockInTime, setClockInTime] = useState(null);
+  const [elapsed, setElapsed] = useState(0); // in seconds
 
   useEffect(() => {
-    let interval;
-    if (startTime) {
-      interval = setInterval(() => {
-        setWorkedSeconds(Math.floor((Date.now() - startTime) / 1000));
+    let timer;
+    if (isClockedIn && clockInTime) {
+      timer = setInterval(() => {
+        setElapsed(Math.floor((new Date() - new Date(clockInTime)) / 1000));
       }, 1000);
+    } else {
+      clearInterval(timer);
     }
-    return () => clearInterval(interval);
-  }, [startTime]);
+    return () => clearInterval(timer);
+  }, [isClockedIn, clockInTime]);
 
-  const handleClockIn = () => setStartTime(Date.now());
-  const handleClockOut = () => setStartTime(null);
+  const handleClockIn = () => {
+    const now = new Date();
+    setClockInTime(now);
+    setIsClockedIn(true);
+
+    const dateKey = moment(now).format("YYYY-MM-DD");
+    const stored = JSON.parse(localStorage.getItem("workingHours")) || {};
+    stored[dateKey] = { ...(stored[dateKey] || {}), clockIn: moment(now).format("HH:mm") };
+    localStorage.setItem("workingHours", JSON.stringify(stored));
+  };
+
+  const handleClockOut = () => {
+    const now = new Date();
+    setIsClockedIn(false);
+    setElapsed(0);
+
+    const dateKey = moment(now).format("YYYY-MM-DD");
+    const stored = JSON.parse(localStorage.getItem("workingHours")) || {};
+
+    if (stored[dateKey]?.clockIn) {
+      stored[dateKey].clockOut = moment(now).format("HH:mm");
+      localStorage.setItem("workingHours", JSON.stringify(stored));
+    }
+
+    setClockInTime(null);
+  };
 
   const formatTime = (seconds) => {
-    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
-    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-    const s = (seconds % 60).toString().padStart(2, '0');
+    const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
+    const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
     return `${h}:${m}:${s}`;
   };
 
-  const shiftDuration = (shiftEnd - shiftStart) / 1000;
-  const progress = (workedSeconds / shiftDuration) * 100;
-
   return (
-    <Card sx={{ width: 450,marginLeft:'150px'}}>
+    <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
       <CardContent>
-        <Typography variant="h6" fontWeight="bold">Let's get to work</Typography>
-        <Box display="flex" justifyContent="space-between" mt={1}>
-          <Typography>
-            {new Date().toDateString()}
-          </Typography>
-          <Typography>{formatTime(workedSeconds)}</Typography>
-        </Box>
+        <Typography variant="h6" fontWeight={600}>Let's get to work</Typography>
+        <Typography color="text.secondary">
+          {moment().format("ddd MMM DD YYYY")}
+        </Typography>
 
-        <LinearProgress variant="determinate" value={progress} sx={{ my: 2 }} />
+        <Typography
+          variant="h4"
+          fontWeight={600}
+          mt={1}
+          sx={{ fontFamily: "monospace", color: "black" }}
+        >
+          {formatTime(elapsed)}
+        </Typography>
 
+        <Divider sx={{ my: 1 }} />
         <Typography variant="body2" color="text.secondary">
           Shift: 9:30am - 6:30pm
         </Typography>
 
-        <Button
-          variant="contained"
-          color={startTime ? 'error' : 'success'}
-          onClick={startTime ? handleClockOut : handleClockIn}
-          sx={{ mt: 2, width: '100%' }}
-        >
-          {startTime ? 'Clock Out' : 'Clock In'}
-        </Button>
+        <Box mt={2}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: isClockedIn ? "#f44336" : "#4caf50",
+              "&:hover": {
+                backgroundColor: isClockedIn ? "#e53935" : "#43a047",
+              },
+              width: "100%",
+            }}
+            onClick={isClockedIn ? handleClockOut : handleClockIn}
+          >
+            {isClockedIn ? "Clock Out" : "Clock In"}
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );
-}
+};
+
+export default ClockInOutCard;

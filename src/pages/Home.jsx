@@ -1,210 +1,81 @@
-import React, { useContext, useState } from "react";
-import {
-  Button,
-  Container,
-  Typography,
-  Box,
-  Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-} from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import CustomTextField from "../pages/CustomTextField";
-import SectionTitle from "./SectionTitle";
+// src/pages/Dashboard.js
+import React from "react";
+import { Typography, Box, Paper, Container } from "@mui/material";
 
-// Validation schema
-const schema = yup.object().shape({
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().required("Password is required"),
-});
-
-const Home = () => {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [loginError, setLoginError] = useState("");
-  const [hrLoginOpen, setHrLoginOpen] = useState(false);
-  const [hrCredentials, setHrCredentials] = useState({
-    email: "hr@company.com",
-    password: "",
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const onSubmit = (data) => {
-    const users = JSON.parse(localStorage.getItem("employee-users")) || [];
-    const user = users.find(
-      (u) => u.email === data.email && u.password === data.password
-    );
-
-    if (user) {
-      setLoginError("");
-      login(user);
-      navigate("/home");
-    } else {
-      setLoginError("Invalid email or password");
-    }
-  };
-
-  const handleHrLogin = () => {
-    // Simple HR authentication - in production, use proper authentication
-    if (hrCredentials.password === "hrpassword") {
-      login({
-        email: hrCredentials.email,
-        name: "HR Manager",
-        role: "hr",
-        id: "hr-001",
-      });
-      setHrLoginOpen(false);
-      navigate("/hr/dashboard");
-    } else {
-      setLoginError("Invalid HR credentials");
-    }
-  };
+const Dashboard = () => {
+  const dashboardData = [
+    {
+      title: "Total Working Days",
+      value: "220",
+      gradient: "linear-gradient(135deg, #e3f2fd 50%, #ffffff 50%)",
+      textColor: "#1976d2",
+    },
+    {
+      title: "Leave Taken",
+      value: "12",
+      gradient: "linear-gradient(135deg, #fce4ec 50%, #ffffff 50%)",
+      textColor: "#d81b60",
+    },
+    {
+      title: "Salary Processed",
+      value: "₹6,50,000",
+      gradient: "linear-gradient(135deg, #e8f5e9 50%, #ffffff 50%)",
+      textColor: "#388e3c",
+    },
+    {
+      title: "Upcoming Holidays",
+      value: "3",
+      gradient: "linear-gradient(135deg, #fff9c4 50%, #ffffff 50%)",
+      textColor: "#080807ff",
+    },
+  ];
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 8 }}>
-      {/* Heading */}
-      <SectionTitle title="Employee Management App" />
-
-      {/* Login Card */}
-      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-        <Typography variant="h5" gutterBottom align="center">
-          Login
-        </Typography>
-
-        {/* Login Form */}
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <CustomTextField
-            label="Email"
-            name="email"
-            register={register}
-            error={errors.email}
-          />
-          <CustomTextField
-            label="Password"
-            name="password"
-            type="password"
-            register={register}
-            error={errors.password}
-          />
-
-          {loginError && (
+    <Container maxWidth="lg" sx={{ mt: 6 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          gap: 4,
+        }}
+      >
+        {dashboardData.map((item, index) => (
+          <Paper
+            key={index}
+            elevation={6}
+            sx={{
+              flex: "1 1 calc(50% - 32px)",
+              minWidth: "250px",
+              height: 160,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 3,
+              background: item.gradient,
+              color: item.textColor,
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "scale(1.04)",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
+              },
+            }}
+          >
             <Typography
-              color="error"
-              variant="body2"
-              align="center"
-              sx={{ mt: 1 }}
+              variant="h6"
+              sx={{ fontWeight: 600, textAlign: "center" }}
             >
-              {loginError}
+              {item.title}
             </Typography>
-          )}
-
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              mt: 2,
-              backgroundColor: "#2a7b8bff",
-              "&:hover": {
-                bgcolor: "#22b7b7ff",
-              },
-            }}
-          >
-            Login
-          </Button>
-        </form>
-
-        {/* Register Link */}
-        <Box mt={3} textAlign="center">
-          <Typography variant="body2">
-            Don't have an account?{" "}
-            <Button onClick={() => navigate("/register")} size="small">
-              Register here
-            </Button>
-          </Typography>
-        </Box>
-
-        {/* HR Login Button */}
-        <Box mt={2} textAlign="center">
-          <Button
-            variant="outlined"
-            onClick={() => setHrLoginOpen(true)}
-            sx={{
-              borderColor: "#2a7b8bff",
-              color: "#2a7b8bff",
-              "&:hover": {
-                borderColor: "#22b7b7ff",
-                color: "#22b7b7ff",
-              },
-            }}
-          >
-            HR Login
-          </Button>
-        </Box>
-      </Paper>
-
-      {/* HR Login Dialog */}
-      <Dialog open={hrLoginOpen} onClose={() => setHrLoginOpen(false)}>
-        <DialogTitle>HR Portal Login</DialogTitle>
-        <DialogContent>
-          <Box sx={{ mt: 2, minWidth: 300 }}>
-            <TextField
-              label="Email"
-              fullWidth
-              margin="normal"
-              value={hrCredentials.email}
-              onChange={(e) =>
-                setHrCredentials({ ...hrCredentials, email: e.target.value })
-              }
-              disabled
-            />
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              margin="normal"
-              value={hrCredentials.password}
-              onChange={(e) =>
-                setHrCredentials({ ...hrCredentials, password: e.target.value })
-              }
-            />
-            {loginError && (
-              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-                {loginError}
-              </Typography>
-            )}
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setHrLoginOpen(false)}>Cancel</Button>
-          <Button
-            onClick={handleHrLogin}
-            variant="contained"
-            sx={{
-              backgroundColor: "#2a7b8bff",
-              "&:hover": {
-                bgcolor: "#22b7b7ff",
-              },
-            }}
-          >
-            Login
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <Typography variant="h4" fontWeight="bold" mt={1}>
+              {item.value}
+            </Typography>
+          </Paper>
+        ))}
+      </Box>
     </Container>
   );
 };
 
-export default Home;
+export default Dashboard;

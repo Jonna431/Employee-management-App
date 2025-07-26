@@ -15,12 +15,14 @@ const data = [
   { day: "Mon", date: 15, hours: 4, color: "#4285F4" },
   { day: "Tue", date: 16, hours: 3.5, color: "#F4B400" },
   { day: "Wed", date: 17, hours: 6, color: "#34A853" },
-  { day: "Thu", date: 18, hours: 0 },
+  { day: "Thu", date: 18, hours: 0,color: "#2cbeafff" },
+  { day: "Fri", date: 17, hours: 6, color: "#34A853" },
+  { day: "Sat", date: 18, hours: 0,color: "#34A853"  },
 ];
 
 export default function WorkingHoursChart() {
   return (
-    <Card sx={{ width: 400, mt: "20px" }}>
+    <Card sx={{ width: 400,marginTop:'10px',height:'350px' , borderRadius: 3,}}>
       <CardContent>
         <Box display="flex" justifyContent="space-between">
           <Typography variant="h6" fontWeight="bold">
